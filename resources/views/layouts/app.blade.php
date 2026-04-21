@@ -34,6 +34,12 @@
     <meta name="twitter:description" content="@yield('og_description', 'Bottega alimentare con i migliori sapori toscani.')">
     <meta name="twitter:image" content="@yield('og_image', asset('images/tagliere-vino.jpeg'))">
 
+    {{-- Geo meta --}}
+    <meta name="geo.region" content="IT-PI">
+    <meta name="geo.placename" content="Montopoli in Val d'Arno">
+    <meta name="geo.position" content="43.6739;10.7486">
+    <meta name="ICBM" content="43.6739, 10.7486">
+
     {{-- Favicon (placeholder per ora) --}}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
@@ -58,11 +64,16 @@
 
     <main>
         @yield('content')
+        @include('components.cookie-banner')
     </main>
-
     <footer class="footer">
         <div class="container">
-            <p>&copy; {{ date('Y') }} La Bottega del Gusto — Piazza Michele, 4, Montopoli in Val d'Arno (PI)</p>
+            <p>&copy; {{ date('Y') }} La Bottega del Gusto — Piazza San Michele, 4, Montopoli in Val d'Arno (PI)</p>
+            <p class="footer__links">
+                <a href="{{ route('cookie-policy') }}">Cookie policy</a>
+                <span aria-hidden="true">·</span>
+                <button type="button" class="footer__linklike" onclick="window.openCookieBanner && window.openCookieBanner()">Gestisci cookie</button>
+            </p>
         </div>
     </footer>
 

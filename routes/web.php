@@ -22,3 +22,8 @@ Route::get('/events', [EventController::class, 'index'])
 Route::get('/events/{slug}', [EventController::class, 'show'])
     ->defaults('locale', 'en')
     ->name('events.show.en');
+
+// Cookies
+Route::get('/cookie-policy', function () {
+    return view('pages.cookie-policy');
+})->name('cookie-policy');

@@ -11,4 +11,5 @@ Disallow: /_debugbar
 Disallow: /telescope
 
 # Sitemap
-Sitemap: https://labottegadimontopoli.it/sitemap.xml
+# TODO: al cutover DNS su Aruba, rimettere https://labottegadimontopoli.it/sitemap.xml
+Sitemap: https://bottega-staging.ipace.dev/sitemap.xml

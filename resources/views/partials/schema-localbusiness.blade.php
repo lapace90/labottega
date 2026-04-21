@@ -10,7 +10,7 @@
     "priceRange": "€€",
     "address": {
         "@@type": "PostalAddress",
-        "streetAddress": "Piazza Michele, 4",
+        "streetAddress": "Piazza San Michele, 4",
         "addressLocality": "Montopoli in Val d'Arno",
         "addressRegion": "PI",
         "postalCode": "56020",
@@ -21,6 +21,12 @@
         "latitude": 43.6739,
         "longitude": 10.7486
     },
+    "knowsAbout": [
+        "Cucina toscana",
+        "Prodotti tipici locali",
+        "Too Good To Go",
+        "Riduzione dello spreco alimentare"
+    ],
     "sameAs": [
         "https://www.facebook.com/LaBottegaDelGustoMontopoli",
         "https://www.instagram.com/la.bottegadel.gusto/"

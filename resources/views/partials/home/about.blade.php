@@ -13,8 +13,13 @@
                     il meglio della tradizione toscana.
                 </p>
                 <p>
-                    Vieni a trovarci in Piazza Michele: ti accoglieremo con un sorriso e ti
+                    Vieni a trovarci in Piazza San Michele: ti accoglieremo con un sorriso e ti
                     guideremo alla scoperta dei prodotti che amiamo.
+                </p>
+                <p>
+                    Crediamo in un consumo consapevole: aderiamo a
+                    <a href="https://share.toogoodtogo.com/item/574013/" target="_blank" rel="noopener"><strong>Too Good To Go</strong></a>
+                    per ridurre lo spreco alimentare e offrire ogni giorno la nostra Magic Box a prezzo speciale.
                 </p>
             </div>
             <div class="about__images">

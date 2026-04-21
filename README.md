@@ -9,7 +9,7 @@ Sito vetrina per **La Bottega del Gusto**, bottega alimentare di Montopoli in Va
 - **Filament 3** — pannello admin su `/admin`
 - **Spatie Translatable** — contenuti IT/EN (al momento IT attivo)
 - **Spatie Sitemap** + **Spatie Schema.org** — SEO
-- **Vite 6** + **Tailwind 4** (CSS statico in `public/css/main.css` per ora)
+- **CSS** statico in `public/css/main.css`
 
 ## Avvio in locale (Docker)
 

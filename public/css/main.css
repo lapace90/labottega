@@ -454,6 +454,16 @@ h1, h2, h3 {
   border-bottom: 1px solid rgba(255,255,255,.3);
 }
 
+.contact__tgtg {
+  margin-top: 24px;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.contact__tgtg a {
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
+}
+
 .contact__cta-wrap {
   margin-top: 24px;
 }
@@ -485,6 +495,50 @@ h1, h2, h3 {
   aspect-ratio: 21 / 9;
   border-radius: 4px;
   overflow: hidden;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+  background: #3d2817;
+  color: #faf7f2;
+}
+
+.map-placeholder__address {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.map-placeholder__btn {
+  padding: 10px 22px;
+  background: #faf7f2;
+  color: #2a1a0a;
+  border: 1px solid #faf7f2;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.map-placeholder__btn:hover,
+.map-placeholder__btn:focus-visible {
+  background: transparent;
+  color: #faf7f2;
+}
+
+.map-placeholder__note {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.75;
+  max-width: 460px;
 }
 
 .contact__map iframe {
@@ -595,6 +649,102 @@ h1, h2, h3 {
   border-top: 1px solid #faf7f2;
 }
 
+.footer__links {
+  margin: 12px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer__links a,
+.footer__linklike {
+  color: #d4c4a8;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.footer__links a:hover,
+.footer__linklike:hover {
+  color: #faf7f2;
+}
+
+/* ============================================
+   PAGINE LEGALI (cookie policy, ecc.)
+   ============================================ */
+.legal__container {
+  max-width: 780px;
+}
+
+.legal__title {
+  font-family: 'Cinzel', serif;
+  font-size: 44px;
+  color: #2a1a0a;
+  margin-bottom: 8px;
+}
+
+.legal__updated {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.legal h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  color: #2a1a0a;
+  margin: 32px 0 12px;
+}
+
+.legal h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: #3d2817;
+  margin: 22px 0 10px;
+}
+
+.legal p,
+.legal ul {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.legal ul {
+  padding-left: 22px;
+}
+
+.legal li {
+  margin-bottom: 8px;
+}
+
+.legal code {
+  background: #f1ead9;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.legal a {
+  color: #9b7a3e;
+  border-bottom: 1px solid #9b7a3e;
+}
+
+.legal__inline-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: #9b7a3e;
+  border-bottom: 1px solid #9b7a3e;
+  cursor: pointer;
+}
+
 /* ============================================
    BRAND MARK (cuore di pane, fisso)
    ============================================ */
@@ -604,7 +754,7 @@ h1, h2, h3 {
   bottom: 24px;
   width: 260px;
   height: auto;
-  z-index: 50;
+  z-index: 100;
   pointer-events: none;
 }
 
@@ -621,4 +771,80 @@ h1, h2, h3 {
     bottom: 0;
     width: 170px;
   }
+}
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(42, 26, 10, 0.95);
+    color: #faf7f2;
+    padding: 20px;
+    z-index: 99;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    transform: translateY(100%);
+    transition: transform 0.4s ease-out;
+}
+
+.cookie-banner--visible {
+    transform: translateY(0);
+}
+
+.cookie-banner__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cookie-banner__text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.cookie-banner__link {
+    color: #d4c4a8;
+    border-bottom: 1px solid #d4c4a8;
+    transition: opacity 0.2s;
+}
+
+.cookie-banner__link:hover {
+    opacity: 0.8;
+}
+
+.cookie-banner__buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.cookie-banner__button {
+    padding: 8px 16px;
+    border: 1px solid #d4c4a8;
+    background: transparent;
+    color: #faf7f2;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cookie-banner__button--accept {
+    background: #d4c4a8;
+    color: #2a1a0a;
+}
+
+.cookie-banner__button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+    .cookie-banner__content {
+        flex-direction: column;
+        text-align: center;
+    }
 }
