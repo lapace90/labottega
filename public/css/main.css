@@ -1,0 +1,510 @@
+/* ============================================
+   FONTS (self-hosted)
+   ============================================ */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/cinzel-v26-latin-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/cinzel-v26-latin-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/lato-v25-latin-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/lato-v25-latin-300italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lato-v25-latin-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lato-v25-latin-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/lato-v25-latin-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/lato-v25-latin-700italic.woff2') format('woff2');
+}
+
+/* ============================================
+   RESET + BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Lato', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #222;
+  background: #fff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* ============================================
+   LAYOUT UTILS
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 50px 0;
+  }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero__slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.hero__slide.is-active {
+  opacity: 1;
+}
+
+.hero__slider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 90px;
+  margin-bottom: 0;
+}
+
+.hero__subtitle {
+  font-size: 60px;
+  margin-bottom: 45px;
+}
+
+.hero__text {
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.hero__text a {
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .hero__content {
+    padding: 30px 24px;
+  }
+  .hero__title { font-size: 60px; }
+  .hero__subtitle { font-size: 30px; margin-bottom: 30px; }
+  .hero__text { font-size: 15px; }
+}
+
+/* ============================================
+   SOCIAL BAR (destra, verticale)
+   ============================================ */
+.socials {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.socials__item {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socials__item a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.socials__item svg {
+  width: 32px;
+  height: 32px;
+}
+
+.socials__item--facebook { background: #3b5998; }
+.socials__item--instagram {
+  background: linear-gradient(202deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+.socials__item--mail { background: #bb001b; }
+
+@media (max-width: 767px) {
+  .socials__item { width: 40px; height: 40px; }
+  .socials__item svg { width: 20px; height: 20px; }
+}
+
+/* ============================================
+   SECTION: CHI SIAMO
+   ============================================ */
+.about {
+  background: #faf7f2;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about__title {
+  font-size: 48px;
+  margin-bottom: 24px;
+  color: #2a1a0a;
+}
+
+.about__text p {
+  margin-bottom: 16px;
+  font-size: 17px;
+}
+
+.about__image {
+  aspect-ratio: 4 / 3;
+  background: #d4c4a8 url('/images/placeholder-about.jpg') center / cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+  .about__grid { grid-template-columns: 1fr; gap: 30px; }
+  .about__title { font-size: 36px; }
+}
+
+/* ============================================
+   SECTION: EVENTI
+   ============================================ */
+.events {
+  background: #fff;
+}
+
+.events__header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.events__title {
+  font-size: 48px;
+  color: #2a1a0a;
+  margin-bottom: 12px;
+}
+
+.events__subtitle {
+  font-size: 18px;
+  color: #777;
+}
+
+.events__carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(300px, 1fr);
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.events__carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.events__carousel::-webkit-scrollbar-thumb {
+  background: #d4c4a8;
+  border-radius: 3px;
+}
+
+.event-card {
+  scroll-snap-align: start;
+  background: #faf7f2;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+}
+
+.event-card__image {
+  aspect-ratio: 16 / 9;
+  background: #d4c4a8 center / cover;
+}
+
+.event-card__body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card__date {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9b7a3e;
+  margin-bottom: 8px;
+}
+
+.event-card__title {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #2a1a0a;
+}
+
+.event-card__location {
+  font-size: 14px;
+  color: #777;
+  margin-top: auto;
+}
+
+/* ============================================
+   SECTION: CONTATTI + MAPPA
+   ============================================ */
+.contact {
+  background: #2a1a0a;
+  color: #faf7f2;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contact__title {
+  font-size: 48px;
+  margin-bottom: 24px;
+  color: #faf7f2;
+}
+
+.contact__info p {
+  margin-bottom: 12px;
+  font-size: 17px;
+}
+
+.contact__info a {
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
+
+.contact__map {
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.contact__map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .contact__grid { grid-template-columns: 1fr; gap: 30px; }
+  .contact__title { font-size: 36px; }
+}
+
+/* ============================================
+   PAGINA EVENTI (listing)
+   ============================================ */
+.events-page {
+  padding-top: 120px;
+}
+
+.events__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.events__pagination {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ============================================
+   DETTAGLIO EVENTO
+   ============================================ */
+.event-detail {
+  padding-top: 120px;
+}
+
+.event-detail__cover {
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  background-color: #d4c4a8;
+  border-radius: 4px;
+  margin-bottom: 40px;
+}
+
+.event-detail__header {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.event-detail__title {
+  font-size: 48px;
+  color: #2a1a0a;
+  margin: 12px 0;
+}
+
+.event-detail__location,
+.event-detail__organizer {
+  font-size: 17px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.event-detail__body {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.event-detail__body p {
+  margin-bottom: 16px;
+}
+
+.event-detail__link,
+.event-detail__back {
+  max-width: 720px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.event-detail__link a,
+.event-detail__back a {
+  color: #9b7a3e;
+  border-bottom: 1px solid #9b7a3e;
+}
+
+@media (max-width: 767px) {
+  .event-detail__title { font-size: 32px; }
+  .events-page, .event-detail { padding-top: 80px; }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: #1a0f05;
+  color: #aaa;
+  padding: 30px 24px;
+  text-align: center;
+  font-size: 14px;
+}

@@ -1,0 +1,14 @@
+# La Bottega del Gusto - Montopoli in Val d'Arno
+
+User-agent: *
+Allow: /
+
+# Blocca admin e asset tecnici
+Disallow: /admin
+Disallow: /storage/
+Disallow: /build/
+Disallow: /_debugbar
+Disallow: /telescope
+
+# Sitemap
+Sitemap: https://labottegadimontopoli.it/sitemap.xml
