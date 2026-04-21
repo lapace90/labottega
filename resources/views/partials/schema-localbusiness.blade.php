@@ -3,7 +3,7 @@
     "@@context": "https://schema.org",
     "@@type": "FoodEstablishment",
     "name": "La Bottega del Gusto",
-    "image": "{{ asset('images/og-default.jpg') }}",
+    "image": "{{ asset('images/tagliere-vino.jpeg') }}",
     "@@id": "{{ url('/') }}",
     "url": "{{ url('/') }}",
     "telephone": "+390571466695",

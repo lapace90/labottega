@@ -17,7 +17,14 @@
                     guideremo alla scoperta dei prodotti che amiamo.
                 </p>
             </div>
-            <div class="about__image" role="img" aria-label="L'interno della bottega"></div>
+            <div class="about__images">
+                <div class="about__image about__image--a"
+                     style="background-image: url('/images/tagliere-aperitivo.jpeg');"
+                     role="img" aria-label="Tagliere di salumi e formaggi della bottega"></div>
+                <div class="about__image about__image--b"
+                     style="background-image: url('/images/fragole-vino1.jpeg');"
+                     role="img" aria-label="Fragole e prosecco rosé"></div>
+            </div>
         </div>
     </div>
 </section>

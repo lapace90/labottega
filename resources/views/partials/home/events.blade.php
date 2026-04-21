@@ -11,6 +11,12 @@
                 <x-event-card :event="$event" />
             @endforeach
         </div>
+
+        <p class="events__more">
+            <a href="{{ route('events.index') }}" class="events__link">
+                Mostra tutti gli eventi →
+            </a>
+        </p>
     </div>
 </section>
 @endif

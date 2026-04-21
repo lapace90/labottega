@@ -25,14 +25,14 @@
     <meta property="og:title" content="@yield('og_title', 'La Bottega del Gusto — Montopoli in Val d\'Arno')">
     <meta property="og:description" content="@yield('og_description', 'Bottega alimentare con i migliori sapori toscani.')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:image" content="@yield('og_image', asset('images/tagliere-vino.jpeg'))">
     <meta property="og:locale" content="it_IT">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('og_title', 'La Bottega del Gusto')">
     <meta name="twitter:description" content="@yield('og_description', 'Bottega alimentare con i migliori sapori toscani.')">
-    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/tagliere-vino.jpeg'))">
 
     {{-- Favicon (placeholder per ora) --}}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -51,6 +51,10 @@
 </head>
 <body>
     @include('partials.socials')
+
+    <div class="brand-mark" role="img" aria-label="La Bottega del Gusto — cuore di pane">
+        <img src="/images/cuore-di-pane-logo.png" alt="">
+    </div>
 
     <main>
         @yield('content')
