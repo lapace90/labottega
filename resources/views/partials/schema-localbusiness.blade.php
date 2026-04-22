@@ -59,7 +59,7 @@
         "organizer": {
             "@@type": "Organization",
             "name": "La Bottega del Gusto",
-            "url": "https://bottega-staging.ipace.dev"
+            "url": "{{ url('/') }}"
         },
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode"
     },
