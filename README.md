@@ -1,14 +1,40 @@
 # La Bottega del Gusto
 
-Sito vetrina per **La Bottega del Gusto**, bottega alimentare di Montopoli in Val d'Arno (PI). Una homepage con hero, presentazione, elenco eventi futuri e contatti, più un pannello admin per gestire gli eventi. Sito solo in italiano.
+🌐 **Live**: [labottegadimontopoli.it](https://labottegadimontopoli.it)  
+📅 In produzione dal 22 aprile 2026
+
+Sito vetrina e gestionale per **La Bottega del Gusto**, bottega alimentare di Montopoli in Val d'Arno (PI). Rimpiazza un sito HTML statico precedente con un'applicazione Laravel moderna, ottimizzata per ricerca locale e gestibile in autonomia dal personale della bottega.
+
+## Screenshot
+
+<p align="center">
+  <img src="docs/screenshot-home.png" width="60%" alt="Homepage desktop">
+  <img src="docs/responsive-home.png" width="25%" alt="Homepage mobile">
+</p>
 
 ## Stack
 
-- **Laravel 12** (PHP ^8.2)
-- **PostgreSQL 17** (via Docker)
-- **Filament 3** — pannello admin su `/admin`
-- **Spatie Sitemap** + **Spatie Schema.org** — SEO
-- **CSS** statico in `public/css/main.css`
+- **Laravel 12** (PHP 8.4)
+- **PostgreSQL 17** in container Docker
+- **Filament 3** per il pannello admin
+- **Spatie Sitemap** + **Spatie Schema.org** per SEO
+- **Nginx** host come reverse proxy + Let's Encrypt per HTTPS
+
+## Features principali
+
+- **Pannello admin Filament** pensato per utenti non-tecnici, con form Repeater per gestire eventi, orari settimanali (fasce multiple per giorno) e chiusure straordinarie
+- **SEO locale strutturato**: Schema.org `FoodEstablishment` + `OpeningHoursSpecification` dinamica dal DB + `EventSeries` ricorrente, sitemap XML, Open Graph, meta geo
+- **Design mobile-first responsive**: layout a 3 colonne su desktop che collassa in stack verticale su tablet/mobile (breakpoint 900px e 767px), hero fullscreen adattato, carosello eventi con scroll-snap orizzontale su touch, immagini ottimizzate con `object-position` diversa su mobile per non perdere soggetti in foto verticali
+- **Badge "Aperto ora" dinamico** calcolato server-side in timezone `Europe/Rome`, inclusi gli intervalli con chiusura pomeridiana e le chiusure straordinarie
+- **Cookie banner GDPR-compliant** (linee guida EDPB 03/2022): pari evidenza visiva su "accetta tutti" / "solo necessari", gating preventivo dell'embed Google Maps, cookie policy veritiera
+- **Nessuna dipendenza npm in produzione**: CSS e JS vanilla self-hosted, font Cinzel + Lato serviti direttamente, scelta deliberata per ridurre attack surface e costi di manutenzione
+- **Integrazione Too Good To Go** con UTM tracking per misurare l'impatto del sito sulle prenotazioni Magic Box
+
+## Architettura
+
+Laravel monolitico server-rendered (no SPA): Blade + Livewire via Filament. Scelta architetturale deliberata — il sito è una vetrina + admin light, non giustifica la complessità di una architettura API-first. La scelta ha reso possibile SEO locale ottimale out-of-the-box senza SSR custom.
+
+Deploy Docker: 2 container (`app` PHP 8.4-FPM + `db` PostgreSQL 17). Nginx host fa reverse proxy e termina TLS, il container app non è mai esposto direttamente.
 
 ## Avvio in locale (Docker)
 
@@ -62,20 +88,26 @@ public/
 routes/web.php           # /, /eventi, /eventi/{slug}, /cookie-policy, /sitemap.xml
 ```
 
-## Contenuti
+## Deploy
 
-- **Homepage**: hero slider (4 foto), sezione chi siamo, prossimi eventi, contatti con mappa.
-- **Eventi**: gestiti da admin (titolo, slug, date, cover, descrizione). Il modello ha scope `upcoming()` (pubblicati e non conclusi) e `past()` (pubblicati e conclusi). La pagina `/eventi` mostra di default gli upcoming; con `?past=1` mostra i passati.
-- **Cookie**: banner consenso + pagina `/cookie-policy`. La mappa Google Maps viene caricata solo dopo consenso esplicito.
-- **SEO**: canonical, hreflang `it`, Open Graph, Twitter Card, JSON-LD `FoodEstablishment` + `Event`, link al sitemap.
+Deploy su VPS Debian, con altri progetti Docker in parallelo. Pattern adottato:
+
+- Progetti in `~/apps/<nome>/`
+- Nginx host (fuori Docker) come reverse proxy, un vhost per dominio in `/etc/nginx/sites-available/`
+- Let's Encrypt con rinnovo automatico (certbot systemd timer)
+- PostgreSQL bindato su `127.0.0.1` (mai esposto pubblicamente)
+- Firewall UFW + fail2ban
 
 ## Asset immagini
 
-Le foto della bottega sono gestite fuori dal repo in `../labottega-assets/originali/`, suddivise in `orizzontali/`, `verticali/`, `video/`. Quelle effettivamente pubblicate sono copiate in `public/images/` mantenendo il nome originale.
+Le foto della bottega sono gestite fuori dal repo in `../labottega-assets/` per non appesantire il tracking Git. Le immagini effettivamente pubblicate sono copiate in `public/images/` manualmente.
 
 ## Note
 
-- Il base image del Dockerfile è `php:8.4-fpm-alpine` con `apk upgrade` per le patch Alpine. Se lo scanner continua a segnalare vulnerabilità, valutare di pinnare una versione PHP più specifica.
+Base image: `php:8.4-fpm-alpine`. Se lo scanner segnala vulnerabilità Alpine, valutare di pinnare una versione PHP più specifica o passare a `-bookworm`.
+
+Lingua: italiano. Il supporto multilingua è stato valutato e scartato dopo analisi dei requisiti reali per questa versione (vedi commit `refactor: remove multilingua support`).
+
 
 ## Licenza
 
