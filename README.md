@@ -9,7 +9,7 @@ Sito vetrina e gestionale per **La Bottega del Gusto**, bottega alimentare di Mo
 
 <p align="center">
   <img src="docs/screenshot-home.png" width="60%" alt="Homepage desktop">
-  <img src="docs/responsive-home.png" width="25%" alt="Homepage mobile">
+  <img src="docs/responsive-home.jpeg" width="25%" alt="Homepage mobile">
 </p>
 
 ## Stack
