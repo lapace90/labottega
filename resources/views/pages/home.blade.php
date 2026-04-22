@@ -6,6 +6,7 @@
 @section('content')
     @include('partials.home.hero')
     @include('partials.home.about')
+    @include('partials.home.regulars')
     @include('partials.home.events')
     @include('partials.home.contact')
 @endsection

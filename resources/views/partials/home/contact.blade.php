@@ -18,8 +18,6 @@
                 </p>
             </div>
 
-            @include('partials.home.hours')
-
             <div class="contact__photo"
                  role="img" aria-label="Torre di Montopoli in Val d'Arno con panchina a forma di cuore">
                 <img src="{{ asset('images/montopoli.jpeg') }}"
@@ -27,6 +25,8 @@
                      loading="lazy"
                      width="400" height="600">
             </div>
+            @include('partials.home.hours')
+
         </div>
 
         <div class="contact__map" id="contact-map">
