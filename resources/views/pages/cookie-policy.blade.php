@@ -113,6 +113,10 @@
             Questa informativa può essere aggiornata per adeguamenti tecnici o normativi.
             La versione corrente è sempre disponibile a questa pagina.
         </p>
+
+        <p class="legal__back">
+            <a href="{{ route('home') }}">← Torna alla home</a>
+        </p>
     </div>
 </section>
 @endsection

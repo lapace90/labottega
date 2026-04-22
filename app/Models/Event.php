@@ -41,4 +41,17 @@ class Event extends Model
             })
             ->orderBy('starts_at');
     }
+
+    public function scopePast($query)
+    {
+        return $query->where('is_published', true)
+            ->where(function ($q) {
+                $q->where('ends_at', '<', now())
+                  ->orWhere(function ($q2) {
+                      $q2->whereNull('ends_at')
+                         ->where('starts_at', '<', now());
+                  });
+            })
+            ->orderBy('starts_at', 'desc');
+    }
 }

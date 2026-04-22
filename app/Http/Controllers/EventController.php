@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::upcoming()->paginate(12);
+        $showPast = $request->boolean('past');
 
-        return view('pages.events.index', compact('events'));
+        $events = ($showPast ? Event::past() : Event::upcoming())
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('pages.events.index', compact('events', 'showPast'));
     }
 
     public function show(string $slug)

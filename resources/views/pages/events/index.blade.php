@@ -15,8 +15,27 @@
             <p class="events__subtitle">Appuntamenti, sagre e manifestazioni in cui partecipiamo</p>
         </header>
 
+        <nav class="events__tabs" aria-label="Filtro eventi">
+            <a href="{{ route('events.index') }}"
+               class="events__tab @if(!$showPast) events__tab--active @endif"
+               @if(!$showPast) aria-current="page" @endif>
+                Prossimi eventi
+            </a>
+            <a href="{{ route('events.index', ['past' => 1]) }}"
+               class="events__tab @if($showPast) events__tab--active @endif"
+               @if($showPast) aria-current="page" @endif>
+                Eventi passati
+            </a>
+        </nav>
+
         @if($events->isEmpty())
-            <p style="text-align:center; padding:60px 0;">Nessun evento in programma al momento.</p>
+            <p style="text-align:center; padding:60px 0;">
+                @if($showPast)
+                    Nessun evento passato da mostrare.
+                @else
+                    Nessun evento in programma al momento.
+                @endif
+            </p>
         @else
             <div class="events__grid">
                 @foreach($events as $event)

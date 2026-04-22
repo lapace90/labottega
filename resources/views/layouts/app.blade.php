@@ -70,8 +70,8 @@
         @include('components.cookie-banner')
     </main>
     <footer class="footer">
-        <div class="container">
-            <p>&copy; {{ date('Y') }} La Bottega del Gusto — Piazza San Michele, 4, Montopoli in Val d'Arno (PI)</p>
+        <div class="container footer__inner">
+            <p class="footer__copy">&copy; {{ date('Y') }} La Bottega del Gusto — Piazza San Michele, 4, Montopoli in Val d'Arno (PI)</p>
             <p class="footer__links">
                 <a href="{{ route('cookie-policy') }}">Cookie policy</a>
                 <span aria-hidden="true">·</span>

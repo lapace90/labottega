@@ -78,6 +78,17 @@ body {
   line-height: 1.6;
   color: #222;
   background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
 }
 
 img {
@@ -561,6 +572,42 @@ h1, h2, h3 {
   padding-top: 120px;
 }
 
+.events__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 40px;
+}
+
+.events__tab {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #d4c4a8;
+  color: #7a5a2e;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.events__tab:hover,
+.events__tab:focus-visible {
+  background: #f5ecd9;
+}
+
+.events__tab--active {
+  background: #7a5a2e;
+  border-color: #7a5a2e;
+  color: #faf7f2;
+}
+
+.events__tab--active:hover,
+.events__tab--active:focus-visible {
+  background: #5a3f1e;
+  color: #faf7f2;
+}
+
 .events__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -620,7 +667,8 @@ h1, h2, h3 {
 }
 
 .event-detail__link,
-.event-detail__back {
+.event-detail__back,
+.legal__back {
   max-width: 720px;
   margin: 40px auto 0;
   text-align: center;
@@ -636,7 +684,8 @@ h1, h2, h3 {
 }
 
 .event-detail__link a,
-.event-detail__back a {
+.event-detail__back a,
+.legal__back a {
   color: #9b7a3e;
   border-bottom: 1px solid #9b7a3e;
 }
@@ -653,18 +702,35 @@ h1, h2, h3 {
   background: #1a0f05;
   color: #aaa;
   padding: 30px 24px;
-  text-align: center;
   font-size: 14px;
   border-top: 1px solid #faf7f2;
 }
 
-.footer__links {
-  margin: 12px 0 0;
+.footer__inner {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer__copy {
+  margin: 0;
+}
+
+.footer__links {
+  margin: 0;
+  display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .footer__inner {
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .footer__links a,
