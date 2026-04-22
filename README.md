@@ -1,13 +1,12 @@
 # La Bottega del Gusto
 
-Sito vetrina per **La Bottega del Gusto**, bottega alimentare di Montopoli in Val d'Arno (PI). Una homepage con hero, presentazione, elenco eventi futuri e contatti, più un pannello admin per gestire gli eventi.
+Sito vetrina per **La Bottega del Gusto**, bottega alimentare di Montopoli in Val d'Arno (PI). Una homepage con hero, presentazione, elenco eventi futuri e contatti, più un pannello admin per gestire gli eventi. Sito solo in italiano.
 
 ## Stack
 
 - **Laravel 12** (PHP ^8.2)
 - **PostgreSQL 17** (via Docker)
 - **Filament 3** — pannello admin su `/admin`
-- **Spatie Translatable** — contenuti IT/EN (al momento IT attivo)
 - **Spatie Sitemap** + **Spatie Schema.org** — SEO
 - **CSS** statico in `public/css/main.css`
 
@@ -49,25 +48,26 @@ composer dev   # avvia server + queue + logs + vite
 ```
 app/
   Filament/Resources/    # Resource admin (es. EventResource)
-  Http/Controllers/      # HomeController, EventController
-  Models/                # Event (con HasTranslations)
+  Http/Controllers/      # HomeController, EventController, SitemapController
+  Models/                # Event
 resources/views/
   layouts/app.blade.php  # Layout base con <head> SEO
-  pages/                 # home, events/index, events/show
+  pages/                 # home, cookie-policy, events/index, events/show
   partials/              # hero, about, events, contact, socials, schema
-  components/            # event-card
+  components/            # event-card, cookie-banner
 public/
   css/main.css           # CSS statico
   js/hero-slider.js      # Slider hero
   images/                # Foto bottega
-routes/web.php           # /, /eventi, /eventi/{slug}, /events, /events/{slug}
+routes/web.php           # /, /eventi, /eventi/{slug}, /cookie-policy, /sitemap.xml
 ```
 
 ## Contenuti
 
 - **Homepage**: hero slider (4 foto), sezione chi siamo, prossimi eventi, contatti con mappa.
-- **Eventi**: gestiti da admin (titolo, slug, date, cover, locale). Il modello ha scope `upcoming()` che filtra solo pubblicati e non conclusi.
-- **SEO**: canonical, hreflang IT / x-default, Open Graph, Twitter Card, JSON-LD `FoodEstablishment` + `Event`, link al sitemap.
+- **Eventi**: gestiti da admin (titolo, slug, date, cover, descrizione). Il modello ha scope `upcoming()` (pubblicati e non conclusi) e `past()` (pubblicati e conclusi). La pagina `/eventi` mostra di default gli upcoming; con `?past=1` mostra i passati.
+- **Cookie**: banner consenso + pagina `/cookie-policy`. La mappa Google Maps viene caricata solo dopo consenso esplicito.
+- **SEO**: canonical, hreflang `it`, Open Graph, Twitter Card, JSON-LD `FoodEstablishment` + `Event`, link al sitemap.
 
 ## Asset immagini
 
@@ -75,7 +75,6 @@ Le foto della bottega sono gestite fuori dal repo in `../labottega-assets/origin
 
 ## Note
 
-- Le route `/events/*` passano `defaults('locale', 'en')` ma `EventController` usa `app()->getLocale()` — serve un middleware che imposti il locale dalla route prima di attivare davvero la versione inglese.
 - Il base image del Dockerfile è `php:8.4-fpm-alpine` con `apk upgrade` per le patch Alpine. Se lo scanner continua a segnalare vulnerabilità, valutare di pinnare una versione PHP più specifica.
 
 ## Licenza
