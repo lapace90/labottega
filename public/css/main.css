@@ -626,6 +626,15 @@ h1, h2, h3 {
   text-align: center;
 }
 
+.events__back {
+  margin: 0 0 24px;
+}
+
+.events__back a {
+  color: #9b7a3e;
+  border-bottom: 1px solid #9b7a3e;
+}
+
 .event-detail__link a,
 .event-detail__back a {
   color: #9b7a3e;

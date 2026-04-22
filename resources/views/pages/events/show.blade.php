@@ -61,9 +61,9 @@
 
         <header class="event-detail__header">
             <time class="event-card__date" datetime="{{ $event->starts_at->toIso8601String() }}">
-                {{ $event->starts_at->locale(app()->getLocale())->isoFormat('dddd D MMMM YYYY [·] HH:mm') }}
+                {{ $event->starts_at->locale('it')->isoFormat('dddd D MMMM YYYY [·] HH:mm') }}
                 @if($event->ends_at)
-                    &mdash; {{ $event->ends_at->locale(app()->getLocale())->isoFormat('HH:mm') }}
+                    &mdash; {{ $event->ends_at->locale('it')->isoFormat('HH:mm') }}
                 @endif
             </time>
 

@@ -3,20 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class Event extends Model
 {
-    use HasTranslations;
-
-    public $translatable = [
-        'slug',
-        'title',
-        'excerpt',
-        'description',
-        'location_name',
-    ];
-
     protected $fillable = [
         'slug',
         'title',

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="it">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,6 @@
 
     {{-- Hreflang --}}
     <link rel="alternate" hreflang="it" href="{{ url()->current() }}">
-    <link rel="alternate" hreflang="x-default" href="{{ url('/') }}">
 
     {{-- Link al sitemap per i robot --}}
     <link rel="sitemap" type="application/xml" href="{{ route('sitemap') }}">
@@ -39,6 +38,10 @@
     <meta name="geo.placename" content="Montopoli in Val d'Arno">
     <meta name="geo.position" content="43.6739;10.7486">
     <meta name="ICBM" content="43.6739, 10.7486">
+
+    {{-- Author / generator --}}
+    <meta name="author" content="Ilaria Pace — https://ipace.dev">
+    <meta name="generator" content="Laravel 12 + Filament 3">
 
     {{-- Favicon (placeholder per ora) --}}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">

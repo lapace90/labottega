@@ -6,7 +6,6 @@ use App\Filament\Resources\EventResource\Pages;
 use App\Models\Event;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,8 +13,6 @@ use Illuminate\Support\Str;
 
 class EventResource extends Resource
 {
-    use Translatable;
-
     protected static ?string $model = Event::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
@@ -28,7 +25,6 @@ class EventResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Contenuti')
-                    ->description('I campi di questa sezione sono traducibili. Usa il selettore di lingua in alto a destra per passare tra IT e EN.')
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->label('Titolo')

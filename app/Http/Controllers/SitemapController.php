@@ -31,14 +31,8 @@ class SitemapController extends Controller
 
         // Singoli eventi pubblicati (solo futuri + in corso)
         Event::upcoming()->get()->each(function (Event $event) use ($sitemap) {
-            $slug = $event->getTranslation('slug', 'it');
-
-            if (! $slug) {
-                return;
-            }
-
             $sitemap->add(
-                Url::create(route('events.show', ['slug' => $slug]))
+                Url::create(route('events.show', ['slug' => $event->slug]))
                     ->setLastModificationDate($event->updated_at)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
                     ->setPriority(0.6)

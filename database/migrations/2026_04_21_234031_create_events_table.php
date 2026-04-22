@@ -13,25 +13,18 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-
-            // Campi traducibili (JSON: {"it": "...", "en": "..."})
-            $table->json('slug');
-            $table->json('title');
-            $table->json('excerpt')->nullable();
-            $table->json('description')->nullable();
-            $table->json('location_name')->nullable();
-
-            // Campi non traducibili
+            $table->string('slug')->unique();
+            $table->string('title');
+            $table->string('excerpt', 300)->nullable();
+            $table->text('description')->nullable();
+            $table->string('location_name')->nullable();
             $table->string('organizer_name')->nullable();
             $table->string('external_url', 500)->nullable();
             $table->dateTime('starts_at');
             $table->dateTime('ends_at')->nullable();
             $table->string('cover_image')->nullable();
             $table->boolean('is_published')->default(false);
-
             $table->timestamps();
-
-            // Indici per performance
             $table->index('starts_at');
             $table->index('is_published');
         });

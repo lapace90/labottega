@@ -6,6 +6,10 @@
 @section('content')
 <section class="section events-page">
     <div class="container">
+        <p class="events__back">
+            <a href="{{ route('home') }}">← Torna alla home</a>
+        </p>
+
         <header class="events__header">
             <h1 class="events__title">Eventi</h1>
             <p class="events__subtitle">Appuntamenti, sagre e manifestazioni in cui partecipiamo</p>
