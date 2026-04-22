@@ -84,7 +84,7 @@
             P.IVA: 02260110503 &middot; C.F.: 02260110503 &middot; REA: PI-193599<br>
             PEC: <a href="mailto:labottegadelgusto2025@pec.it">labottegadelgusto2025@pec.it</a><br>
             Email: <a href="mailto:labottegadelgustosas@gmail.com">labottegadelgustosas@gmail.com</a><br>
-            Telefono: <a href="tel:+390571466695">+39 0571 466695</a>
+            Telefono: <a href="tel:+393928491518">+39 392 8491518</a>
         </p>
 
         <h2>5. Diritti dell'utente</h2>

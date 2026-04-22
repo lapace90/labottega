@@ -1,12 +1,9 @@
 <section class="section contact" id="contatti" aria-labelledby="contact-title">
     <div class="container">
-        <div class="contact__grid">
-            <div class="contact__image"
-                 style="background-image: url('/images/montopoli.jpeg');"
-                 role="img" aria-label="Torre di Montopoli in Val d'Arno con panchina a forma di cuore">
-            </div>
+        <h2 class="contact__title" id="contact-title">Dove siamo</h2>
+
+        <div class="contact__top">
             <div class="contact__info">
-                <h2 class="contact__title" id="contact-title">Dove siamo</h2>
                 <p><strong>Piazza Michele Da Montopoli, 3</strong><br>56020 Montopoli in Val d'Arno (PI)</p>
                 <p>
                     Cellulare:
@@ -16,18 +13,19 @@
                     Email:
                     <a href="mailto:labottegadelgustosas@gmail.com">labottegadelgustosas@gmail.com</a>
                 </p>
-
                 <p class="contact__tgtg">
                     🌱 <a href="https://share.toogoodtogo.com/item/574013/" target="_blank" rel="noopener">Aderente a Too Good To Go</a>
                 </p>
+            </div>
 
-                <p class="contact__cta-wrap">
-                    <a class="contact__cta"
-                       href="https://www.google.com/maps/dir/?api=1&destination=Piazza+Michele+Da+Montopoli+3%2C+Montopoli+in+Val+d%27Arno+PI"
-                       target="_blank" rel="noopener">
-                        Indicazioni stradali →
-                    </a>
-                </p>
+            @include('partials.home.hours')
+
+            <div class="contact__photo"
+                 role="img" aria-label="Torre di Montopoli in Val d'Arno con panchina a forma di cuore">
+                <img src="{{ asset('images/montopoli.jpeg') }}"
+                     alt="La torre medievale di Montopoli in Val d'Arno"
+                     loading="lazy"
+                     width="400" height="600">
             </div>
         </div>
 
@@ -55,7 +53,7 @@
                 function loadMap() {
                     if (container.dataset.loaded === '1') return;
                     const iframe = document.createElement('iframe');
-                    iframe.src = "https://maps.google.com/maps?q=Piazza+Michele+Da+Montopoli+3,+Montopoli+in+Val+d%27Arno+PI&hl=it&z=17&output=embed";
+                    iframe.src = "https://maps.google.com/maps?q=La+Bottega+del+Gusto+Montopoli&ll=43.6703471,10.7608832&z=16&output=embed";
                     iframe.loading = 'lazy';
                     iframe.referrerPolicy = 'no-referrer-when-downgrade';
                     iframe.title = "Mappa La Bottega del Gusto — Piazza Michele Da Montopoli, 3, Montopoli in Val d'Arno";

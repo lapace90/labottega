@@ -20,7 +20,6 @@
         <div class="hero__bottom">
             <p class="hero__text">
                 Piazza Michele Da Montopoli, 3, Montopoli in Val d'Arno (PI)<br>
-                <a href="tel:+390571466695">+39 0571 466695</a> |
                 <a href="tel:+393928491518">+39 392 8491518</a>
             </p>
         </div>

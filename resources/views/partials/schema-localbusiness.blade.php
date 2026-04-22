@@ -1,3 +1,6 @@
+@php
+    $openingSpec = app(\App\Services\OpeningHoursService::class)->forSchemaOrg();
+@endphp
 <script type="application/ld+json">
 {
     "@@context": "https://schema.org",
@@ -6,7 +9,7 @@
     "image": "{{ asset('images/tagliere-vino.jpeg') }}",
     "@@id": "{{ url('/') }}",
     "url": "{{ url('/') }}",
-    "telephone": "+390571466695",
+    "telephone": "+393928491518",
     "priceRange": "€€",
     "address": {
         "@@type": "PostalAddress",
@@ -27,6 +30,9 @@
         "Too Good To Go",
         "Riduzione dello spreco alimentare"
     ],
+@if(!empty($openingSpec))
+    "openingHoursSpecification": {!! json_encode($openingSpec, JSON_UNESCAPED_SLASHES) !!},
+@endif
     "sameAs": [
         "https://www.facebook.com/LaBottegaDelGustoMontopoli",
         "https://www.instagram.com/la.bottegadel.gusto/"
