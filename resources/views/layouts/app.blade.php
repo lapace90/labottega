@@ -61,9 +61,10 @@
 <body>
     @include('partials.socials')
 
-    <div class="brand-mark" role="img" aria-label="La Bottega del Gusto — cuore di pane">
-        <img src="/images/cuore-di-pane-logo.png" alt="">
-    </div>
+    <button type="button" class="brand-mark" aria-label="Torna in cima alla pagina"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+        <img src="/images/cuore-di-pane-logo.png" alt="La Bottega del Gusto — cuore di pane">
+    </button>
 
     <main>
         @yield('content')

@@ -830,7 +830,23 @@ h1, h2, h3 {
   width: 260px;
   height: auto;
   z-index: 100;
-  pointer-events: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.brand-mark:hover,
+.brand-mark:focus-visible {
+  transform: translateY(-4px);
+}
+
+.brand-mark:focus-visible {
+  outline: 2px solid #c9a96a;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .brand-mark img {
@@ -838,6 +854,7 @@ h1, h2, h3 {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
 }
 
 @media (max-width: 767px) {
