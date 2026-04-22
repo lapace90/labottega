@@ -718,8 +718,10 @@ h1, h2, h3 {
 }
 
 .hours__day {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: center;
   padding: 4px 0;
   border-bottom: 1px solid rgba(255,255,255,.1);
   font-size: 15px;
@@ -736,6 +738,11 @@ h1, h2, h3 {
 .hours__day-value {
   opacity: 0.9;
   font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.hours__day-value--full {
+  grid-column: 2 / -1;
 }
 
 .hours__closed {

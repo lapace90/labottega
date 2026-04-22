@@ -18,17 +18,33 @@
 
     <ul class="hours__list">
         @foreach($weekly as $day)
+            @php
+                $morning = collect($day['slots'])->first(fn($s) => $s['opens'] < '14:00');
+                $afternoon = collect($day['slots'])->first(fn($s) => $s['opens'] >= '14:00');
+                $isClosed = empty($day['slots']);
+            @endphp
             <li class="hours__day">
                 <span class="hours__day-label">{{ $day['label'] }}</span>
-                <span class="hours__day-value">
-                    @if(empty($day['slots']))
+                @if($isClosed)
+                    <span class="hours__day-value hours__day-value--full">
                         <span class="hours__closed">Chiuso</span>
-                    @else
-                        @foreach($day['slots'] as $i => $slot)
-                            {{ $slot['opens'] }}–{{ $slot['closes'] }}@if($i < count($day['slots']) - 1) · @endif
-                        @endforeach
-                    @endif
-                </span>
+                    </span>
+                @else
+                    <span class="hours__day-value">
+                        @if($morning)
+                            {{ $morning['opens'] }}–{{ $morning['closes'] }}
+                        @else
+                            <span class="hours__closed">Chiuso</span>
+                        @endif
+                    </span>
+                    <span class="hours__day-value">
+                        @if($afternoon)
+                            {{ $afternoon['opens'] }}–{{ $afternoon['closes'] }}
+                        @else
+                            <span class="hours__closed">Chiuso</span>
+                        @endif
+                    </span>
+                @endif
             </li>
         @endforeach
     </ul>
