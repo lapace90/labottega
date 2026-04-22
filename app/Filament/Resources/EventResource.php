@@ -61,7 +61,7 @@ class EventResource extends Resource
                         Forms\Components\TextInput::make('location_name')
                             ->label('Luogo')
                             ->maxLength(200)
-                            ->placeholder('Es. Piazza San Michele, Montopoli in Val d\'Arno'),
+                            ->placeholder('Es. Piazza Michele da Montopoli 3, Montopoli in Val d\'Arno'),
                     ])
                     ->columns(1),
 

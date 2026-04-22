@@ -80,7 +80,7 @@
         <p>
             <strong>LA BOTTEGA DEL GUSTO S.A.S. DI PACE JESSICA</strong><br>
             Società in accomandita semplice (S.a.s.)<br>
-            Sede legale: Piazza San Michele, 4 — 56020 Montopoli in Val d'Arno (PI), Italia<br>
+            Sede legale: Piazza Michele Da Montopoli, 3 — 56020 Montopoli in Val d'Arno (PI), Italia<br>
             P.IVA: 02260110503 &middot; C.F.: 02260110503 &middot; REA: PI-193599<br>
             PEC: <a href="mailto:labottegadelgusto2025@pec.it">labottegadelgusto2025@pec.it</a><br>
             Email: <a href="mailto:labottegadelgustosas@gmail.com">labottegadelgustosas@gmail.com</a><br>

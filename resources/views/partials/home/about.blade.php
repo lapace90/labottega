@@ -13,7 +13,7 @@
                     il meglio della tradizione toscana.
                 </p>
                 <p>
-                    Vieni a trovarci in Piazza San Michele: ti accoglieremo con un sorriso e ti
+                    Vieni a trovarci in Piazza Michele Da Montopoli: ti accoglieremo con un sorriso e ti
                     guideremo alla scoperta dei prodotti che amiamo.
                 </p>
                 <p>

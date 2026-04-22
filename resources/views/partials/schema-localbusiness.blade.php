@@ -10,7 +10,7 @@
     "priceRange": "€€",
     "address": {
         "@@type": "PostalAddress",
-        "streetAddress": "Piazza San Michele, 4",
+        "streetAddress": "Piazza Michele Da Montopoli, 3",
         "addressLocality": "Montopoli in Val d'Arno",
         "addressRegion": "PI",
         "postalCode": "56020",
@@ -18,8 +18,8 @@
     },
     "geo": {
         "@@type": "GeoCoordinates",
-        "latitude": 43.6739,
-        "longitude": 10.7486
+        "latitude": 43.6703471,
+        "longitude": 10.7608832
     },
     "knowsAbout": [
         "Cucina toscana",

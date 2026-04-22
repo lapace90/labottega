@@ -36,8 +36,8 @@
     {{-- Geo meta --}}
     <meta name="geo.region" content="IT-PI">
     <meta name="geo.placename" content="Montopoli in Val d'Arno">
-    <meta name="geo.position" content="43.6739;10.7486">
-    <meta name="ICBM" content="43.6739, 10.7486">
+    <meta name="geo.position" content="43.6703471;10.7608832">
+    <meta name="ICBM" content="43.6703471, 10.7608832">
 
     {{-- Author / generator --}}
     <meta name="author" content="Ilaria Pace — https://ipace.dev">
@@ -71,7 +71,7 @@
     </main>
     <footer class="footer">
         <div class="container footer__inner">
-            <p class="footer__copy">&copy; {{ date('Y') }} La Bottega del Gusto — Piazza San Michele, 4, Montopoli in Val d'Arno (PI)</p>
+            <p class="footer__copy">&copy; {{ date('Y') }} La Bottega del Gusto — Piazza Michele Da Montopoli, 3, Montopoli in Val d'Arno (PI)</p>
             <p class="footer__links">
                 <a href="{{ route('cookie-policy') }}">Cookie policy</a>
                 <span aria-hidden="true">·</span>

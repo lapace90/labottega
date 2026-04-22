@@ -7,7 +7,7 @@
             </div>
             <div class="contact__info">
                 <h2 class="contact__title" id="contact-title">Dove siamo</h2>
-                <p><strong>Piazza San Michele, 4</strong><br>56020 Montopoli in Val d'Arno (PI)</p>
+                <p><strong>Piazza Michele Da Montopoli, 3</strong><br>56020 Montopoli in Val d'Arno (PI)</p>
                 <p>
                     Cellulare:
                     <a href="tel:+393928491518">+39 392 8491518</a>
@@ -23,7 +23,7 @@
 
                 <p class="contact__cta-wrap">
                     <a class="contact__cta"
-                       href="https://www.google.com/maps/dir/?api=1&destination=Piazza+San+Michele+4%2C+Montopoli+in+Val+d%27Arno+PI"
+                       href="https://www.google.com/maps/dir/?api=1&destination=Piazza+Michele+Da+Montopoli+3%2C+Montopoli+in+Val+d%27Arno+PI"
                        target="_blank" rel="noopener">
                         Indicazioni stradali →
                     </a>
@@ -34,7 +34,7 @@
         <div class="contact__map" id="contact-map">
             <div class="map-placeholder">
                 <p class="map-placeholder__address">
-                    <strong>Piazza San Michele, 4</strong><br>
+                    <strong>Piazza Michele Da Montopoli, 3</strong><br>
                     Montopoli in Val d'Arno (PI)
                 </p>
                 <button type="button" class="map-placeholder__btn" data-load-map>
@@ -55,10 +55,10 @@
                 function loadMap() {
                     if (container.dataset.loaded === '1') return;
                     const iframe = document.createElement('iframe');
-                    iframe.src = "https://maps.google.com/maps?q=Piazza+San+Michele+4,+Montopoli+in+Val+d%27Arno+PI&hl=it&z=17&output=embed";
+                    iframe.src = "https://maps.google.com/maps?q=Piazza+Michele+Da+Montopoli+3,+Montopoli+in+Val+d%27Arno+PI&hl=it&z=17&output=embed";
                     iframe.loading = 'lazy';
                     iframe.referrerPolicy = 'no-referrer-when-downgrade';
-                    iframe.title = "Mappa La Bottega del Gusto — Piazza San Michele, 4, Montopoli in Val d'Arno";
+                    iframe.title = "Mappa La Bottega del Gusto — Piazza Michele Da Montopoli, 3, Montopoli in Val d'Arno";
                     iframe.allowFullscreen = true;
                     container.innerHTML = '';
                     container.appendChild(iframe);
