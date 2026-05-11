@@ -1524,3 +1524,63 @@ h1, h2, h3 {
   .product-detail__quantity-select,
   .product-detail__add-to-cart-btn { max-width: 100%; }
 }
+
+/* ============================================
+   SITE HEADER (pagine interne, non sulla home)
+   ============================================ */
+.site-header {
+  background: transparent;
+  padding: 20px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.site-header__home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #2a1a0a;
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.site-header__home-link:hover {
+  opacity: 0.7;
+  transform: translateX(-2px);
+}
+
+.site-header__home-link svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    padding: 16px 0;
+  }
+  .site-header__home-link {
+    font-size: 16px;
+  }
+  .site-header__home-link svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* ============================================
+   SOCIAL BAR — bottone shop
+   ============================================ */
+.socials__item--shop {
+  background: #9b7a3e;
+  margin-bottom: 24px;
+}
+
+.socials__item--shop a {
+  color: #fff;
+}
+
+.socials__item--shop:hover {
+  opacity: 0.85;
+}
