@@ -67,17 +67,13 @@
     </button>
 
     @if(!request()->is('/'))
-    <header class="site-header">
-        <div class="container">
-            <a href="{{ url('/') }}" class="site-header__home-link" aria-label="Torna alla home">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M19 12H5"/>
-                    <polyline points="12 19 5 12 12 5"/>
-                </svg>
-                <span>La Bottega del Gusto</span>
-            </a>
-        </div>
-    </header>
+    <a href="{{ url('/') }}" class="back-home" aria-label="Torna alla home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5"/>
+            <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        <span>Home</span>
+    </a>
     @endif
 
     <main>

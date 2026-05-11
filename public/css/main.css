@@ -73,6 +73,7 @@ html {
 }
 
 body {
+  position: relative;
   font-family: 'Lato', system-ui, sans-serif;
   font-weight: 300;
   line-height: 1.6;
@@ -1526,46 +1527,52 @@ h1, h2, h3 {
 }
 
 /* ============================================
-   SITE HEADER (pagine interne, non sulla home)
+   BACK HOME LINK (freccia fluttuante pagine interne)
    ============================================ */
-.site-header {
-  background: transparent;
-  padding: 20px 0;
-  position: relative;
-  z-index: 10;
-}
-
-.site-header__home-link {
+.back-home {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 100;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
   color: #2a1a0a;
-  font-family: 'Cinzel', serif;
-  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.site-header__home-link:hover {
+  letter-spacing: 0.3px;
   opacity: 0.7;
-  transform: translateX(-2px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-.site-header__home-link svg {
+.back-home:hover {
+  opacity: 1;
+  background: rgba(250, 247, 242, 1);
+  transform: translateX(-3px);
+}
+
+.back-home svg {
   flex-shrink: 0;
 }
 
 @media (max-width: 767px) {
-  .site-header {
-    padding: 16px 0;
+  .back-home {
+    top: 16px;
+    left: 16px;
+    padding: 6px 10px;
+    font-size: 12px;
   }
-  .site-header__home-link {
-    font-size: 16px;
-  }
-  .site-header__home-link svg {
-    width: 14px;
-    height: 14px;
+  .back-home svg {
+    width: 12px;
+    height: 12px;
   }
 }
 
