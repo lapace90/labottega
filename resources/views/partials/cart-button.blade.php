@@ -6,8 +6,8 @@
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
         </svg>
         <span>Carrello</span>
-        @if($cartCount > 0)
-            <span class="cart-button__badge" aria-label="{{ $cartCount }} articoli nel carrello">{{ $cartCount }}</span>
-        @endif
+        <span class="cart-button__badge" data-cart-count
+              {{ $cartCount === 0 ? 'hidden' : '' }}
+              aria-label="{{ $cartCount }} articoli nel carrello">{{ $cartCount }}</span>
     </a>
 @endif

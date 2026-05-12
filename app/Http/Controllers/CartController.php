@@ -50,6 +50,63 @@ class CartController extends Controller
         ]);
     }
 
+    public function update(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'product_id'    => 'required|integer|exists:products,id',
+            'variant_grams' => 'nullable|integer|min:1',
+            'quantity'      => 'required|integer|min:1|max:99',
+        ]);
+
+        try {
+            $result = $this->cart->updateQuantity(
+                $data['product_id'],
+                $data['variant_grams'] ?? null,
+                $data['quantity']
+            );
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+
+        return response()->json([
+            'success'       => true,
+            'cart_count'    => $result['count'],
+            'cart_subtotal' => $result['subtotal'],
+        ]);
+    }
+
+    public function remove(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'product_id'    => 'required|integer',
+            'variant_grams' => 'nullable|integer|min:1',
+        ]);
+
+        $result = $this->cart->removeItem(
+            $data['product_id'],
+            $data['variant_grams'] ?? null
+        );
+
+        return response()->json([
+            'success'       => true,
+            'cart_count'    => $result['count'],
+            'cart_subtotal' => $result['subtotal'],
+            'is_empty'      => $result['is_empty'],
+        ]);
+    }
+
+    public function clear(): JsonResponse
+    {
+        $this->cart->clear();
+
+        return response()->json([
+            'success'       => true,
+            'cart_count'    => 0,
+            'cart_subtotal' => 0,
+            'is_empty'      => true,
+        ]);
+    }
+
     public function summary(): JsonResponse
     {
         return response()->json([

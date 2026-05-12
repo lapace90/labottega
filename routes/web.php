@@ -28,6 +28,9 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
     Route::post('/add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
     Route::get('/summary', [\App\Http\Controllers\CartController::class, 'summary'])->name('summary');
+    Route::patch('/update', [\App\Http\Controllers\CartController::class, 'update'])->name('update');
+    Route::delete('/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
+    Route::delete('/clear', [\App\Http\Controllers\CartController::class, 'clear'])->name('clear');
 });
 
 // Cookies

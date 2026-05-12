@@ -13,9 +13,9 @@
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 0 1-8 0"/>
             </svg>
-            @if($showShopBadge)
-                <span class="socials__badge" aria-label="{{ $cartCount }} articoli nel carrello">{{ $cartCount }}</span>
-            @endif
+            <span class="socials__badge" data-cart-count
+                  {{ !$showShopBadge ? 'hidden' : '' }}
+                  aria-label="{{ $cartCount }} articoli nel carrello">{{ $cartCount }}</span>
         </a>
     </li>
     <li class="socials__item socials__item--facebook">

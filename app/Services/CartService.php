@@ -88,6 +88,54 @@ class CartService
         ];
     }
 
+    public function updateQuantity(int $productId, ?int $variantGrams, int $newQuantity): array
+    {
+        if ($newQuantity < 1) {
+            throw new \InvalidArgumentException('Quantità minima: 1');
+        }
+        if ($newQuantity > 99) {
+            throw new \InvalidArgumentException('Quantità massima: 99');
+        }
+
+        $items = $this->getItems();
+        $product = \App\Models\Product::find($productId);
+
+        if (!$product) {
+            throw new \InvalidArgumentException('Prodotto non trovato');
+        }
+
+        $updated = $items->map(function ($item) use ($productId, $variantGrams, $newQuantity, $product) {
+            if ($item['product_id'] === $productId && ($item['variant_grams'] ?? null) === $variantGrams) {
+                $item['quantity'] = $newQuantity;
+                $item['line_total'] = $item['unit_price'] * $newQuantity;
+                $item['display_quantity'] = $product->pricing_type === 'weight'
+                    ? "{$variantGrams}g × {$newQuantity}"
+                    : "× {$newQuantity}";
+            }
+            return $item;
+        });
+
+        session([self::SESSION_KEY => $updated->values()->all()]);
+
+        return [
+            'count'    => $this->count(),
+            'subtotal' => $this->subtotal(),
+            'items'    => $this->getItems()->values()->all(),
+        ];
+    }
+
+    public function removeItem(int $productId, ?int $variantGrams = null): array
+    {
+        $this->remove($productId, $variantGrams);
+
+        return [
+            'count'    => $this->count(),
+            'subtotal' => $this->subtotal(),
+            'items'    => $this->getItems()->values()->all(),
+            'is_empty' => $this->isEmpty(),
+        ];
+    }
+
     public function remove(int $productId, ?int $variantGrams = null): void
     {
         $items = $this->getItems()->reject(

@@ -8,48 +8,103 @@
     <div class="container">
         <h1 class="cart-page__title">Il tuo carrello</h1>
 
-        @if($isEmpty)
-            <p class="cart-page__empty">
-                Il tuo carrello è vuoto. <a href="{{ route('shop.index') }}">Torna allo shop</a>.
-            </p>
-        @else
-            <ul class="cart-page__items">
-                @foreach($items as $item)
-                    <li class="cart-item">
-                        @if($item['image_path'])
-                            <img src="{{ asset('storage/' . $item['image_path']) }}" alt="{{ $item['product_name'] }}" class="cart-item__image">
-                        @else
-                            <div class="cart-item__image cart-item__image--placeholder"></div>
-                        @endif
+        <div id="cart-content" data-empty="{{ $isEmpty ? 'true' : 'false' }}">
 
-                        <div class="cart-item__info">
-                            <h3 class="cart-item__name">{{ $item['product_name'] }}</h3>
-                            <p class="cart-item__quantity">{{ $item['display_quantity'] }}</p>
+            {{-- Stato vuoto --}}
+            <div class="cart-page__empty-state" {{ $isEmpty ? '' : 'hidden' }}>
+                <p>Il tuo carrello è vuoto.</p>
+                <a href="{{ route('shop.index') }}" class="cart-page__shop-link">
+                    Torna allo shop →
+                </a>
+            </div>
+
+            {{-- Stato con prodotti --}}
+            <div class="cart-page__items-state" {{ $isEmpty ? 'hidden' : '' }}>
+                <ul class="cart-items" id="cart-items-list">
+                    @foreach($items as $item)
+                        <li class="cart-item"
+                            data-product-id="{{ $item['product_id'] }}"
+                            data-variant-grams="{{ $item['variant_grams'] ?? '' }}"
+                            data-pricing-type="{{ $item['pricing_type'] }}"
+                            data-unit-price="{{ $item['unit_price'] }}">
+
+                            @if($item['image_path'])
+                                <img src="{{ asset('storage/' . $item['image_path']) }}"
+                                     alt="{{ $item['product_name'] }}"
+                                     class="cart-item__image"
+                                     loading="lazy">
+                            @else
+                                <div class="cart-item__image cart-item__image--placeholder" aria-hidden="true"></div>
+                            @endif
+
+                            <div class="cart-item__info">
+                                <h3 class="cart-item__name">
+                                    <a href="{{ route('shop.product', $item['product_slug']) }}">
+                                        {{ $item['product_name'] }}
+                                    </a>
+                                </h3>
+
+                                @if($item['variant_grams'])
+                                    <p class="cart-item__variant">{{ $item['variant_grams'] }}g</p>
+                                @endif
+
+                                <p class="cart-item__unit-price">{{ number_format($item['unit_price'], 2, ',', '.') }} € cad.</p>
+                            </div>
+
+                            <div class="cart-item__quantity-controls">
+                                <button type="button"
+                                        class="cart-item__qty-btn"
+                                        data-action="decrease-quantity"
+                                        aria-label="Diminuisci quantità">−</button>
+                                <span class="cart-item__qty-value" data-quantity>{{ $item['quantity'] }}</span>
+                                <button type="button"
+                                        class="cart-item__qty-btn"
+                                        data-action="increase-quantity"
+                                        aria-label="Aumenta quantità">+</button>
+                            </div>
+
+                            <p class="cart-item__line-total" data-line-total>
+                                {{ number_format($item['line_total'], 2, ',', '.') }} €
+                            </p>
+
+                            <button type="button"
+                                    class="cart-item__remove"
+                                    data-action="remove-item"
+                                    aria-label="Rimuovi {{ $item['product_name'] }} dal carrello">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+
+                <div class="cart-page__summary">
+                    <button type="button"
+                            class="cart-page__clear-btn"
+                            data-action="clear-cart">
+                        Svuota carrello
+                    </button>
+
+                    <div class="cart-page__totals">
+                        <div class="cart-page__subtotal-row">
+                            <span>Subtotale</span>
+                            <strong id="cart-subtotal">{{ number_format($subtotal, 2, ',', '.') }} €</strong>
                         </div>
 
-                        <p class="cart-item__price">{{ number_format($item['line_total'], 2, ',', '.') }} €</p>
-                    </li>
-                @endforeach
-            </ul>
+                        <p class="cart-page__delivery-note">
+                            Costi di consegna calcolati al prossimo passaggio.
+                        </p>
 
-            <div class="cart-page__summary">
-                <div class="cart-page__subtotal">
-                    <span>Subtotale</span>
-                    <strong>{{ number_format($subtotal, 2, ',', '.') }} €</strong>
-                </div>
-
-                <div class="cart-page__notice">
-                    <p>📝 La pagina di checkout sarà disponibile prossimamente.</p>
-                    <p>Per ordinare ora, contatta direttamente la bottega:</p>
-                    <a href="https://wa.me/393928491518?text=Ciao!%20Vorrei%20ordinare%20questi%20prodotti:%20{{ urlencode($items->map(fn($i) => $i['display_quantity'] . ' ' . $i['product_name'])->implode(', ')) }}"
-                       target="_blank"
-                       rel="noopener"
-                       class="cart-page__whatsapp">
-                        💬 Manda l'ordine su WhatsApp
-                    </a>
+                        <a href="#" class="cart-page__checkout-btn" id="cart-checkout-btn">
+                            Procedi all'ordine
+                        </a>
+                    </div>
                 </div>
             </div>
-        @endif
+
+        </div>
     </div>
 </section>
 @endsection
