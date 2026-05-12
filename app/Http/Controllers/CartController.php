@@ -11,6 +11,17 @@ class CartController extends Controller
 {
     public function __construct(protected CartService $cart) {}
 
+
+    public function index()
+    {
+        return view('pages.cart.index', [
+            'items' => $this->cart->getItems(),
+            'subtotal' => $this->cart->subtotal(),
+            'count' => $this->cart->count(),
+            'isEmpty' => $this->cart->isEmpty(),
+        ]);
+    }
+    
     public function add(Request $request): JsonResponse
     {
         $data = $request->validate([

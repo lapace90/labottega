@@ -17,6 +17,7 @@ class ShopController extends Controller
                 $category->featured_products = Product::where('category_id', $category->id)
                     ->where('is_available', true)
                     ->orderBy('sort_order')
+                    ->with('variants')
                     ->limit(4)
                     ->get();
                 return $category;
@@ -35,6 +36,7 @@ class ShopController extends Controller
             ->where('is_available', true)
             ->orderBy('sort_order')
             ->orderBy('name')
+            ->with('variants')
             ->paginate(12);
 
         $otherCategories = Category::where('is_active', true)

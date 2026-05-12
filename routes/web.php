@@ -25,6 +25,7 @@ Route::prefix('shop')->name('shop.')->group(function () {
 
 // Carrello (AJAX)
 Route::prefix('cart')->name('cart.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
     Route::post('/add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
     Route::get('/summary', [\App\Http\Controllers\CartController::class, 'summary'])->name('summary');
 });

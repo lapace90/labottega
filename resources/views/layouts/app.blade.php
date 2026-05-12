@@ -96,6 +96,11 @@
         </div>
     </footer>
 
+    @include('partials.quick-add-modal')
+    @include('partials.toast')
+
+    <script src="{{ asset('js/cart.js') }}?v={{ file_exists(public_path('js/cart.js')) ? filemtime(public_path('js/cart.js')) : 1 }}" defer></script>
+
     @stack('scripts')
 </body>
 </html>
