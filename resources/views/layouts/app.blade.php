@@ -50,6 +50,9 @@
     <link rel="preload" href="/fonts/cinzel-v26-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/lato-v25-latin-300.woff2" as="font" type="font/woff2" crossorigin>
 
+    {{-- CSRF token per richieste AJAX --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
@@ -75,6 +78,8 @@
         <span>Home</span>
     </a>
     @endif
+
+    @include('partials.cart-button')
 
     <main>
         @yield('content')

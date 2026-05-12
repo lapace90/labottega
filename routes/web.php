@@ -23,6 +23,12 @@ Route::prefix('shop')->name('shop.')->group(function () {
     Route::get('/prodotto/{slug}', [ShopController::class, 'product'])->name('product');
 });
 
+// Carrello (AJAX)
+Route::prefix('cart')->name('cart.')->group(function () {
+    Route::post('/add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
+    Route::get('/summary', [\App\Http\Controllers\CartController::class, 'summary'])->name('summary');
+});
+
 // Cookies
 Route::get('/cookie-policy', function () {
     return view('pages.cookie-policy');

@@ -1580,6 +1580,7 @@ h1, h2, h3 {
    SOCIAL BAR — bottone shop
    ============================================ */
 .socials__item--shop {
+  position: relative;
   background: #9b7a3e;
   margin-bottom: 24px;
 }
@@ -1590,4 +1591,122 @@ h1, h2, h3 {
 
 .socials__item--shop:hover {
   opacity: 0.85;
+}
+
+.socials__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: #b84a4a;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  border: 2px solid #ffffff;
+}
+
+/* ============================================
+   CART BUTTON (top-right floating)
+   ============================================ */
+.cart-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  color: #2a1a0a;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cart-button:hover {
+  opacity: 1;
+  background: rgba(250, 247, 242, 1);
+  transform: translateX(3px);
+}
+
+.cart-button svg {
+  flex-shrink: 0;
+}
+
+.cart-button__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  margin-left: 4px;
+  background: #b84a4a;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .cart-button {
+    top: 16px;
+    right: 16px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .cart-button svg {
+    width: 12px;
+    height: 12px;
+  }
+  .cart-button__badge {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}
+
+/* ============================================
+   PRODUCT CARD — stato "in carrello"
+   ============================================ */
+.product-card--in-cart {
+  border: 1.5px solid #9b7a3e;
+  box-shadow: 0 4px 16px rgba(155, 122, 62, 0.2);
+}
+
+.product-card__image-wrapper {
+  position: relative;
+}
+
+.product-card__in-cart-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #2d6b2f;
+  color: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2;
 }

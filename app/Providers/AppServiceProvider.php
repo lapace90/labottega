@@ -2,23 +2,25 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        $this->app->singleton(\App\Services\CartService::class);
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        //
+        View::composer('*', function ($view) {
+            $cart = app(\App\Services\CartService::class);
+            $view->with([
+                'cartCount'      => $cart->count(),
+                'cartProductIds' => $cart->productIds(),
+                'cartIsEmpty'    => $cart->isEmpty(),
+            ]);
+        });
     }
 }
