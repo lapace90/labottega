@@ -43,11 +43,18 @@
 
     // ── Cart counter ──────────────────────────────────────────────────────────
 
+    window.updateCartCounter = updateCartCounter;
     function updateCartCounter(count) {
+        var onShop = window.location.pathname.startsWith('/shop');
+
         document.querySelectorAll('[data-cart-count]').forEach(function (el) {
             el.textContent = count;
             el.setAttribute('aria-label', count + ' articoli nel carrello');
-            if (count > 0) {
+
+            var isSocialBadge = el.classList.contains('socials__badge');
+            var visible = count > 0 && (!isSocialBadge || !onShop);
+
+            if (visible) {
                 el.removeAttribute('hidden');
             } else {
                 el.setAttribute('hidden', '');
@@ -75,18 +82,18 @@
 
     // ── Modal ─────────────────────────────────────────────────────────────────
 
-    const modal     = document.getElementById('quick-add-modal');
-    const backdrop  = document.getElementById('quick-add-backdrop');
-    const form      = document.getElementById('quick-add-form');
-    const qaImage   = document.getElementById('qa-image');
-    const qaName    = document.getElementById('qa-name');
-    const qaUPrice  = document.getElementById('qa-unit-price');
-    const qaSelect  = document.getElementById('qa-select');
-    const qaTotal   = document.getElementById('qa-total');
-    const qaSubmit  = document.getElementById('qa-submit');
-    const qaClose   = document.getElementById('qa-close');
-    const qaCancel  = document.getElementById('qa-cancel');
-    const qaLabel   = document.getElementById('qa-select-label');
+    const modal = document.getElementById('quick-add-modal');
+    const backdrop = document.getElementById('quick-add-backdrop');
+    const form = document.getElementById('quick-add-form');
+    const qaImage = document.getElementById('qa-image');
+    const qaName = document.getElementById('qa-name');
+    const qaUPrice = document.getElementById('qa-unit-price');
+    const qaSelect = document.getElementById('qa-select');
+    const qaTotal = document.getElementById('qa-total');
+    const qaSubmit = document.getElementById('qa-submit');
+    const qaClose = document.getElementById('qa-close');
+    const qaCancel = document.getElementById('qa-cancel');
+    const qaLabel = document.getElementById('qa-select-label');
 
     var currentProduct = null;
 
@@ -96,7 +103,7 @@
         if (qaImage) {
             qaImage.style.backgroundImage = data.image ? "url('" + data.image + "')" : 'none';
         }
-        if (qaName)   qaName.textContent = data.name;
+        if (qaName) qaName.textContent = data.name;
         if (qaUPrice) {
             qaUPrice.textContent = data.pricingType === 'piece'
                 ? fmtPrice(data.pricePiece || 0) + ' cad.'
@@ -115,7 +122,7 @@
             } else {
                 if (qaLabel) qaLabel.textContent = 'Grammatura';
                 var variants = [];
-                try { variants = JSON.parse(data.variants || '[]'); } catch (_) {}
+                try { variants = JSON.parse(data.variants || '[]'); } catch (_) { }
                 variants.forEach(function (v) {
                     var opt = new Option(v.grams + 'g — ' + fmtPrice(v.price), String(v.grams));
                     opt.dataset.price = v.price;
@@ -173,19 +180,19 @@
             e.preventDefault();
             e.stopPropagation();
             openModal({
-                id:          btn.dataset.productId,
-                name:        btn.dataset.productName,
-                slug:        btn.dataset.productSlug,
-                image:       btn.dataset.productImage,
+                id: btn.dataset.productId,
+                name: btn.dataset.productName,
+                slug: btn.dataset.productSlug,
+                image: btn.dataset.productImage,
                 pricingType: btn.dataset.pricingType,
-                pricePiece:  btn.dataset.pricePiece,
-                pricePerKg:  btn.dataset.pricePerKg,
-                variants:    btn.dataset.variants || '[]',
+                pricePiece: btn.dataset.pricePiece,
+                pricePerKg: btn.dataset.pricePerKg,
+                variants: btn.dataset.variants || '[]',
             });
         }
     });
 
-    if (qaClose)  qaClose.addEventListener('click', closeModal);
+    if (qaClose) qaClose.addEventListener('click', closeModal);
     if (qaCancel) qaCancel.addEventListener('click', closeModal);
     if (backdrop) backdrop.addEventListener('click', closeModal);
 
@@ -204,48 +211,48 @@
             if (!currentProduct) return;
 
             var payload = {
-                product_id:    parseInt(currentProduct.id, 10),
-                quantity:      currentProduct.pricingType === 'piece'
-                                   ? parseInt(qaSelect.value, 10)
-                                   : 1,
+                product_id: parseInt(currentProduct.id, 10),
+                quantity: currentProduct.pricingType === 'piece'
+                    ? parseInt(qaSelect.value, 10)
+                    : 1,
                 variant_grams: currentProduct.pricingType === 'weight'
-                                   ? parseInt(qaSelect.value, 10)
-                                   : null,
+                    ? parseInt(qaSelect.value, 10)
+                    : null,
             };
 
             qaSubmit.disabled = true;
             qaSubmit.textContent = 'Aggiunta…';
 
             fetch('/cart/add', {
-                method:  'POST',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': csrfToken,
-                    'Accept':       'application/json',
+                    'Accept': 'application/json',
                 },
                 body: JSON.stringify(payload),
             })
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-                if (data.success) {
-                    var pid = currentProduct.id;
-                    closeModal();
-                    showToast('Aggiunto al carrello');
-                    updateCartCounter(data.cart_count);
-                    markCardInCart(pid);
-                } else {
-                    showToast(data.error || "Errore durante l'aggiunta", true);
-                }
-            })
-            .catch(function () {
-                showToast('Errore di rete. Riprova.', true);
-            })
-            .finally(function () {
-                if (qaSubmit) {
-                    qaSubmit.disabled = false;
-                    qaSubmit.textContent = 'Aggiungi al carrello';
-                }
-            });
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    if (data.success) {
+                        var pid = currentProduct.id;
+                        closeModal();
+                        showToast('Aggiunto al carrello');
+                        updateCartCounter(data.cart_count);
+                        markCardInCart(pid);
+                    } else {
+                        showToast(data.error || "Errore durante l'aggiunta", true);
+                    }
+                })
+                .catch(function () {
+                    showToast('Errore di rete. Riprova.', true);
+                })
+                .finally(function () {
+                    if (qaSubmit) {
+                        qaSubmit.disabled = false;
+                        qaSubmit.textContent = 'Aggiungi al carrello';
+                    }
+                });
         });
     }
 
@@ -261,6 +268,9 @@
     if (!cartContent) return;
 
     var csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+
+    // Tiene traccia delle request pending per evitare race condition
+    const pendingRequests = new Set();
 
     function formatPrice(value) {
         return parseFloat(value).toLocaleString('it-IT', {
@@ -287,89 +297,152 @@
         cartContent.dataset.empty = 'true';
     }
 
-    function toastError(msg) {
+    function showToastError(msg) {
         if (typeof window.showToast === 'function') {
             window.showToast(msg, true);
         }
     }
 
-    function updateQuantity(itemEl, delta) {
-        var currentQty = parseInt(itemEl.querySelector('[data-quantity]').textContent, 10);
-        var newQty = currentQty + delta;
+    async function updateQuantity(itemEl, delta) {
+        const productId = parseInt(itemEl.dataset.productId, 10);
+        const variantGrams = itemEl.dataset.variantGrams ? parseInt(itemEl.dataset.variantGrams, 10) : null;
+        const requestKey = `qty-${productId}-${variantGrams ?? 'none'}`;
+
+        // Race condition guard: se una richiesta è in volo per questo item, ignora
+        if (pendingRequests.has(requestKey)) return;
+
+        const currentQty = parseInt(itemEl.querySelector('[data-quantity]').textContent, 10);
+        const newQty = currentQty + delta;
+
         if (newQty < 1 || newQty > 99) return;
 
-        var productId = parseInt(itemEl.dataset.productId, 10);
-        var variantGrams = itemEl.dataset.variantGrams ? parseInt(itemEl.dataset.variantGrams, 10) : null;
+        // Disabilita i bottoni +/- di questo item durante la request
+        const qtyButtons = itemEl.querySelectorAll('.cart-item__qty-btn');
+        qtyButtons.forEach(btn => btn.disabled = true);
+        pendingRequests.add(requestKey);
 
-        fetch('/cart/update', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({ product_id: productId, variant_grams: variantGrams, quantity: newQty }),
-        })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-            if (data.success) {
-                updateLineTotal(itemEl, newQty);
-                updateTotals(data);
-            } else {
-                toastError(data.error || 'Errore aggiornamento quantità');
+        try {
+            const response = await fetch('/cart/update', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    variant_grams: variantGrams,
+                    quantity: newQty,
+                }),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                showToastError(error.error || 'Errore aggiornamento quantità');
+                return;
             }
-        })
-        .catch(function () { toastError('Errore di connessione'); });
+
+            const data = await response.json();
+            updateLineTotal(itemEl, newQty);
+            updateTotals(data);
+        } catch (e) {
+            console.error('updateQuantity error:', e);
+            // Mostriamo errore solo se è un vero errore di network/server
+            if (e.name === 'TypeError' && e.message.includes('fetch')) {
+                showToastError('Errore di connessione');
+            }
+            // Sennò log silenzioso, l'utente non vede toast
+        } finally {
+            // Sempre riabilita i bottoni e rimuovi dalla coda
+            qtyButtons.forEach(btn => btn.disabled = false);
+            pendingRequests.delete(requestKey);
+        }
     }
 
-    function removeItem(itemEl) {
-        var productId = parseInt(itemEl.dataset.productId, 10);
-        var variantGrams = itemEl.dataset.variantGrams ? parseInt(itemEl.dataset.variantGrams, 10) : null;
+    async function removeItem(itemEl) {
+        const name = itemEl.querySelector('.cart-item__name')?.textContent.trim() ?? 'questo prodotto';
+        if (!confirm(`Rimuovere ${name} dal carrello?`)) return;
 
-        fetch('/cart/remove', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({ product_id: productId, variant_grams: variantGrams }),
-        })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-            if (data.success) {
-                itemEl.remove();
-                updateTotals(data);
-                if (data.is_empty) showEmptyState();
-            } else {
-                toastError('Errore rimozione articolo');
+        const productId = parseInt(itemEl.dataset.productId, 10);
+        const variantGrams = itemEl.dataset.variantGrams ? parseInt(itemEl.dataset.variantGrams, 10) : null;
+        const requestKey = `remove-${productId}-${variantGrams ?? 'none'}`;
+
+        if (pendingRequests.has(requestKey)) return;
+
+        // Disabilita il bottone remove e i +/- per evitare doppio-click
+        const allButtons = itemEl.querySelectorAll('button');
+        allButtons.forEach(btn => btn.disabled = true);
+        pendingRequests.add(requestKey);
+
+        try {
+            const response = await fetch('/cart/remove', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    variant_grams: variantGrams,
+                }),
+            });
+
+            if (!response.ok) {
+                showToastError('Errore rimozione articolo');
+                return;
             }
-        })
-        .catch(function () { toastError('Errore di connessione'); });
+
+            const data = await response.json();
+            itemEl.remove();
+            updateTotals(data);
+
+            if (data.is_empty) {
+                showEmptyState();
+            }
+        } catch (e) {
+            console.error('removeItem error:', e);
+            if (e.name === 'TypeError' && e.message.includes('fetch')) {
+                showToastError('Errore di connessione');
+            }
+        } finally {
+            pendingRequests.delete(requestKey);
+            // Non riabilitiamo i bottoni perché l'elemento viene rimosso dal DOM se successo
+        }
     }
 
-    function clearCart() {
-        if (!confirm('Sei sicuro di voler svuotare il carrello?')) return;
+function clearCart() {
+    if (!confirm('Sei sicuro di voler svuotare il carrello?')) return;
 
-        fetch('/cart/clear', {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json',
-            },
+    fetch('/cart/clear', {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken,
+            'Accept': 'application/json',
+        },
+    })
+        .then(function (res) {
+            console.log('Response status:', res.status);
+            return res.json();
         })
-        .then(function (res) { return res.json(); })
         .then(function (data) {
+            console.log('Response data:', data);
             if (data.success) {
+                console.log('Calling showEmptyState...');
                 document.querySelectorAll('.cart-item').forEach(function (el) { el.remove(); });
                 updateTotals(data);
                 showEmptyState();
+                console.log('After showEmptyState, data-empty:', cartContent.dataset.empty);
             } else {
-                toastError('Errore svuotamento carrello');
+                console.log('Success was falsy!');
+                showToastError('Errore svuotamento carrello');
             }
         })
-        .catch(function () { toastError('Errore di connessione'); });
-    }
+        .catch(function (e) {
+            console.error('clearCart error:', e);
+            showToastError('Errore di connessione');
+        });
+}
 
     cartContent.addEventListener('click', function (e) {
         var target = e.target.closest('[data-action]');
@@ -381,8 +454,8 @@
         switch (action) {
             case 'increase-quantity': updateQuantity(itemEl, +1); break;
             case 'decrease-quantity': updateQuantity(itemEl, -1); break;
-            case 'remove-item':       removeItem(itemEl);          break;
-            case 'clear-cart':        clearCart();                 break;
+            case 'remove-item': removeItem(itemEl); break;
+            case 'clear-cart': clearCart(); break;
         }
     });
 })();

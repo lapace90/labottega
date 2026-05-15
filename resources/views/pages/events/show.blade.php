@@ -90,9 +90,6 @@
             </p>
         @endif
 
-        <p class="event-detail__back">
-            <a href="{{ route('events.index') }}">← Tutti gli eventi</a>
-        </p>
     </div>
 </article>
 @endsection

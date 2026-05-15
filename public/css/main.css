@@ -1593,6 +1593,10 @@ h1, h2, h3 {
   opacity: 0.85;
 }
 
+.socials__badge[hidden] {
+  display: none !important;
+}
+
 .socials__badge {
   position: absolute;
   top: -4px;
@@ -2024,6 +2028,11 @@ body.modal-open {
   text-align: center;
 }
 
+.cart-page__empty-state[hidden],
+.cart-page__items-state[hidden] {
+  display: none !important;
+}
+
 /* Stato vuoto */
 .cart-page__empty-state {
   text-align: center;
@@ -2245,6 +2254,17 @@ body.modal-open {
 
 .cart-page__checkout-btn:hover {
   background: #3d2814;
+}
+
+.cart-item__qty-btn:disabled,
+.cart-item__remove:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.cart-item__qty-btn:disabled:hover,
+.cart-item__remove:disabled:hover {
+    background: transparent;
 }
 
 @media (max-width: 767px) {
