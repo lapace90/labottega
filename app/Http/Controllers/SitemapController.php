@@ -69,6 +69,15 @@ class SitemapController extends Controller
             );
         });
 
+        // Pagine legali
+        foreach (['terms', 'privacy-policy', 'shipping-policy', 'return-policy'] as $name) {
+            $sitemap->add(
+                Url::create(route($name))
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                    ->setPriority(0.3)
+            );
+        }
+
         return response($sitemap->render(), 200, [
             'Content-Type' => 'application/xml',
         ]);

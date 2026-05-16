@@ -8,6 +8,7 @@
 
     <title>@yield('title', 'La Bottega del Gusto — Montopoli in Val d\'Arno')</title>
     <meta name="description" content="@yield('description', 'Bottega alimentare a Montopoli in Val d\'Arno (PI). Il meglio dei sapori toscani: salumi, formaggi, olio, vini e specialità locali.')">
+    <meta name="robots" content="@yield('robots', 'index,follow')">
 
     {{-- Canonical --}}
     <link rel="canonical" href="{{ url()->current() }}">
@@ -87,12 +88,20 @@
     </main>
     <footer class="footer">
         <div class="container footer__inner">
-            <p class="footer__copy">&copy; {{ date('Y') }} La Bottega del Gusto — Piazza Michele Da Montopoli, 3, Montopoli in Val d'Arno (PI)</p>
-            <p class="footer__links">
+            <p class="footer__copy">&copy; {{ date('Y') }} La Bottega del Gusto &mdash; Piazza Michele Da Montopoli, 3, Montopoli in Val d'Arno (PI)</p>
+            <nav class="footer__links" aria-label="Link legali">
+                <a href="{{ route('terms') }}">Termini di vendita</a>
+                <span aria-hidden="true">·</span>
+                <a href="{{ route('privacy-policy') }}">Privacy policy</a>
+                <span aria-hidden="true">·</span>
+                <a href="{{ route('shipping-policy') }}">Spedizioni</a>
+                <span aria-hidden="true">·</span>
+                <a href="{{ route('return-policy') }}">Resi e rimborsi</a>
+                <span aria-hidden="true">·</span>
                 <a href="{{ route('cookie-policy') }}">Cookie policy</a>
                 <span aria-hidden="true">·</span>
                 <button type="button" class="footer__linklike" onclick="window.openCookieBanner && window.openCookieBanner()">Gestisci cookie</button>
-            </p>
+            </nav>
         </div>
     </footer>
 
