@@ -54,6 +54,13 @@ class Order extends Model
         return self::TYPES[$this->type] ?? $this->type;
     }
 
+    public function getPaymentStatusLabelAttribute(): string
+    {
+        // Per ora: sempre "DA PAGARE AL RITIRO" (no Stripe attivo)
+        // Quando Sprint 3 aggiungerà Stripe, qui controlleremo $this->payment_status
+        return 'DA PAGARE AL RITIRO';
+    }
+
     public static function generateOrderNumber(): string
     {
         $year = now()->format('Y');

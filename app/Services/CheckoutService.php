@@ -128,7 +128,7 @@ class CheckoutService
         $msg .= "*Tipo*: Click & Collect (ritiro in bottega)\n";
         $msg .= "*Ritiro*: {$slotDate}, ore {$order->slot_time_range}\n\n";
         $msg .= "*Prodotti*:\n{$itemsText}\n\n";
-        $msg .= "*Totale*: " . number_format((float) $order->total, 2, ',', '.') . " €\n\n";
+        $msg .= "*Totale*: " . number_format($order->total, 2, ',', '.') . " € — *{$order->payment_status_label}*\n\n";
 
         if ($order->customer_notes) {
             $msg .= "*Note*: {$order->customer_notes}\n\n";
