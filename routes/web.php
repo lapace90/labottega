@@ -33,6 +33,13 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::delete('/clear', [\App\Http\Controllers\CartController::class, 'clear'])->name('clear');
 });
 
+// Checkout
+Route::prefix('checkout')->name('checkout.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('index');
+    Route::post('/', [\App\Http\Controllers\CheckoutController::class, 'submit'])->name('submit');
+    Route::get('/success/{orderNumber}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
+});
+
 // Cookies
 Route::get('/cookie-policy', function () {
     return view('pages.cookie-policy');

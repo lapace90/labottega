@@ -97,7 +97,7 @@
                             Costi di consegna calcolati al prossimo passaggio.
                         </p>
 
-                        <a href="#" class="cart-page__checkout-btn" id="cart-checkout-btn">
+                        <a href="{{ route('checkout.index') }}" class="cart-page__checkout-btn" id="cart-checkout-btn">
                             Procedi all'ordine
                         </a>
                     </div>
