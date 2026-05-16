@@ -24,7 +24,7 @@ class CheckoutService
         $closings = SpecialClosing::where('starts_at', '<=', $now->copy()->addDays($daysAhead)->toDateString())
             ->where(function ($q) use ($now) {
                 $q->whereNull('ends_at')
-                  ->orWhere('ends_at', '>=', $now->toDateString());
+                    ->orWhere('ends_at', '>=', $now->toDateString());
             })
             ->get();
 
@@ -124,7 +124,7 @@ class CheckoutService
 
         $slotDate = $order->slot_date->locale('it')->isoFormat('dddd D MMMM');
 
-        $msg  = "Ciao! Ho appena fatto l'ordine *{$order->order_number}* sul vostro sito.\n\n";
+        $msg = "Ciao! Sono *{$order->customer_name}*, ho appena fatto l'ordine *{$order->order_number}* sul vostro sito.\n\n";
         $msg .= "*Tipo*: Click & Collect (ritiro in bottega)\n";
         $msg .= "*Ritiro*: {$slotDate}, ore {$order->slot_time_range}\n\n";
         $msg .= "*Prodotti*:\n{$itemsText}\n\n";
