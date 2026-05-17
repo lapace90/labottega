@@ -2873,7 +2873,7 @@ body.modal-open {
 .socials__shop-pulse {
   position: absolute;
   top: -2px;
-  right: -2px;
+  left: -2px;
   width: 10px;
   height: 10px;
   background: #d4a942;
