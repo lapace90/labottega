@@ -4,6 +4,7 @@
 @section('description', 'Bottega alimentare a Montopoli in Val d\'Arno (PI). Il meglio dei sapori toscani: salumi, formaggi, olio, vini e specialità locali. Piazza Michele Da Montopoli, 3.')
 
 @section('content')
+    @include('partials.shop-coming-soon-banner')
     @include('partials.home.hero')
     @include('partials.home.about')
     @include('partials.home.regulars')

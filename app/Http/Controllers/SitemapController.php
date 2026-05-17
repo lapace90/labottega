@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SettingHelper;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Product;
@@ -41,33 +42,41 @@ class SitemapController extends Controller
             );
         });
 
-        // Shop
-        $sitemap->add(
-            Url::create(route('shop.index'))
-                ->setLastModificationDate(Carbon::now())
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-                ->setPriority(0.9)
-        );
-
-        // Categorie attive
-        Category::where('is_active', true)->get()->each(function (Category $category) use ($sitemap) {
+        if (SettingHelper::shopEnabled()) {
+            // Shop
             $sitemap->add(
-                Url::create(route('shop.category', ['slug' => $category->slug]))
-                    ->setLastModificationDate($category->updated_at)
+                Url::create(route('shop.index'))
+                    ->setLastModificationDate(Carbon::now())
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-                    ->setPriority(0.7)
+                    ->setPriority(0.9)
             );
-        });
 
-        // Prodotti disponibili
-        Product::available()->get()->each(function (Product $product) use ($sitemap) {
+            // Categorie attive
+            Category::where('is_active', true)->get()->each(function (Category $category) use ($sitemap) {
+                $sitemap->add(
+                    Url::create(route('shop.category', ['slug' => $category->slug]))
+                        ->setLastModificationDate($category->updated_at)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                        ->setPriority(0.7)
+                );
+            });
+
+            // Prodotti disponibili
+            Product::available()->get()->each(function (Product $product) use ($sitemap) {
+                $sitemap->add(
+                    Url::create(route('shop.product', ['slug' => $product->slug]))
+                        ->setLastModificationDate($product->updated_at)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                        ->setPriority(0.6)
+                );
+            });
+        } else {
             $sitemap->add(
-                Url::create(route('shop.product', ['slug' => $product->slug]))
-                    ->setLastModificationDate($product->updated_at)
+                Url::create(url('/shop/coming-soon'))
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-                    ->setPriority(0.6)
+                    ->setPriority(0.2)
             );
-        });
+        }
 
         // Pagine legali
         foreach (['terms', 'privacy-policy', 'shipping-policy', 'return-policy'] as $name) {

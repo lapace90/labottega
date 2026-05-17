@@ -16,31 +16,52 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/eventi', [EventController::class, 'index'])->name('events.index');
 Route::get('/eventi/{slug}', [EventController::class, 'show'])->name('events.show');
 
-// Shop
-Route::prefix('shop')->name('shop.')->group(function () {
-    Route::get('/', [ShopController::class, 'index'])->name('index');
-    Route::get('/categoria/{slug}', [ShopController::class, 'category'])->name('category');
-    Route::get('/prodotto/{slug}', [ShopController::class, 'product'])->name('product');
+// Shop coming-soon (sempre accessibile, fuori dal middleware)
+Route::get('/shop/coming-soon', [ShopController::class, 'comingSoon'])->name('shop.coming-soon');
+
+// Shop, carrello e checkout protetti dal middleware shop.enabled
+Route::middleware('shop.enabled')->group(function () {
+    Route::prefix('shop')->name('shop.')->group(function () {
+        Route::get('/', [ShopController::class, 'index'])->name('index');
+        Route::get('/categoria/{slug}', [ShopController::class, 'category'])->name('category');
+        Route::get('/prodotto/{slug}', [ShopController::class, 'product'])->name('product');
+    });
+
+    // Carrello (AJAX)
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+        Route::post('/add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
+        Route::get('/summary', [\App\Http\Controllers\CartController::class, 'summary'])->name('summary');
+        Route::patch('/update', [\App\Http\Controllers\CartController::class, 'update'])->name('update');
+        Route::delete('/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
+        Route::delete('/clear', [\App\Http\Controllers\CartController::class, 'clear'])->name('clear');
+    });
+
+    // Checkout
+    Route::prefix('checkout')->name('checkout.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('index');
+        Route::post('/', [\App\Http\Controllers\CheckoutController::class, 'submit'])->name('submit');
+        Route::get('/success/{orderNumber}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
+    });
 });
 
-// Carrello (AJAX)
-Route::prefix('cart')->name('cart.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
-    Route::post('/add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
-    Route::get('/summary', [\App\Http\Controllers\CartController::class, 'summary'])->name('summary');
-    Route::patch('/update', [\App\Http\Controllers\CartController::class, 'update'])->name('update');
-    Route::delete('/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
-    Route::delete('/clear', [\App\Http\Controllers\CartController::class, 'clear'])->name('clear');
-});
+// Pagine legali
+Route::get('/privacy-policy', function () {
+    return view('pages.privacy-policy');
+})->name('privacy-policy');
 
-// Checkout
-Route::prefix('checkout')->name('checkout.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('index');
-    Route::post('/', [\App\Http\Controllers\CheckoutController::class, 'submit'])->name('submit');
-    Route::get('/success/{orderNumber}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('success');
-});
+Route::get('/return-policy', function () {
+    return view('pages.return-policy');
+})->name('return-policy');
 
-// Cookies
+Route::get('/shipping-policy', function () {
+    return view('pages.shipping-policy');
+})->name('shipping-policy');
+
+Route::get('/terms', function () {
+    return view('pages.terms');
+})->name('terms');
+
 Route::get('/cookie-policy', function () {
     return view('pages.cookie-policy');
 })->name('cookie-policy');

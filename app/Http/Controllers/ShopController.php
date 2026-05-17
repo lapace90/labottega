@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SettingHelper;
 use App\Models\Category;
 use App\Models\Product;
 
 class ShopController extends Controller
 {
+    public function comingSoon()
+    {
+        if (SettingHelper::shopEnabled()) {
+            return redirect()->route('shop.index');
+        }
+
+        return view('pages.shop.coming-soon');
+    }
+
     public function index()
     {
         $categories = Category::where('is_active', true)

@@ -97,9 +97,15 @@
                             Costi di consegna calcolati al prossimo passaggio.
                         </p>
 
-                        <a href="{{ route('checkout.index') }}" class="cart-page__checkout-btn" id="cart-checkout-btn">
-                            Procedi all'ordine
-                        </a>
+                        @if(\App\Helpers\SettingHelper::shopEnabled())
+                            <a href="{{ route('checkout.index') }}" class="cart-page__checkout-btn" id="cart-checkout-btn">
+                                Procedi all'ordine
+                            </a>
+                        @else
+                            <div class="cart-page__disabled-notice">
+                                Lo shop online non è ancora attivo. Contattaci su WhatsApp per ordini.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OpeningHoursSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(SettingsSeeder::class);
     }
 }

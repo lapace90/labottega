@@ -7,7 +7,7 @@
 
 <ul class="socials" aria-label="Navigazione rapida e social">
     <li class="socials__item socials__item--shop">
-        <a href="{{ route('shop.index') }}" title="Vai allo shop" aria-label="Vai allo shop">
+        <a href="{{ route('shop.index') }}" title="Vai allo shop" aria-label="Vai allo shop" style="position: relative;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
@@ -16,6 +16,9 @@
             <span class="socials__badge" data-cart-count
                   {{ !$showShopBadge ? 'hidden' : '' }}
                   aria-label="{{ $cartCount }} articoli nel carrello">{{ $cartCount }}</span>
+            @if(!\App\Helpers\SettingHelper::shopEnabled())
+                <span class="socials__shop-pulse" aria-label="Shop online in arrivo" title="Shop online in arrivo"></span>
+            @endif
         </a>
     </li>
     <li class="socials__item socials__item--facebook">

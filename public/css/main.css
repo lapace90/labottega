@@ -921,29 +921,26 @@ h1, h2, h3 {
 
 .footer__inner {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.footer__copy {
-  margin: 0;
+  gap: 14px;
+  text-align: center;
 }
 
 .footer__links {
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 13px;
 }
 
-@media (max-width: 767px) {
-  .footer__inner {
-    justify-content: center;
-    text-align: center;
-  }
+.footer__copy {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
 }
 
 .footer__links a,
@@ -1031,6 +1028,16 @@ h1, h2, h3 {
   color: #9b7a3e;
   border-bottom: 1px solid #9b7a3e;
   cursor: pointer;
+}
+
+.legal__note {
+  margin-top: 32px;
+  padding: 16px;
+  background: #faf8f4;
+  border-left: 3px solid #d4b483;
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
 }
 
 /* ============================================
@@ -2723,4 +2730,181 @@ body.modal-open {
 
 .checkout-success__back-link:hover {
   text-decoration: underline;
+}
+
+/* ============================================
+   SHOP COMING SOON BANNER (home)
+   ============================================ */
+.shop-banner {
+  background: linear-gradient(to right, #9b7a3e, #b89952);
+  color: #faf7f2;
+  padding: 12px 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.shop-banner__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.shop-banner__icon {
+  font-size: 18px;
+}
+
+.shop-banner__content p {
+  margin: 0;
+}
+
+.shop-banner__link {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.shop-banner__link:hover {
+  color: #faf7f2;
+}
+
+@media (max-width: 600px) {
+  .shop-banner { font-size: 13px; padding: 10px 12px; }
+  .shop-banner__content { gap: 8px; }
+}
+
+/* ============================================
+   SHOP COMING SOON PAGE
+   ============================================ */
+.shop-coming-soon {
+  background: #faf7f2;
+  padding: 80px 0 100px;
+  text-align: center;
+  min-height: 60vh;
+}
+
+.shop-coming-soon .container {
+  max-width: 600px;
+}
+
+.shop-coming-soon__icon {
+  color: #9b7a3e;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.shop-coming-soon__title {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  color: #2a1a0a;
+  margin-bottom: 16px;
+}
+
+.shop-coming-soon__lead {
+  font-size: 17px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.shop-coming-soon__cta-section {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 32px;
+}
+
+.shop-coming-soon__cta-section h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: #2a1a0a;
+  margin: 0 0 12px 0;
+}
+
+.shop-coming-soon__cta-section p {
+  color: #777;
+  margin-bottom: 24px;
+}
+
+.shop-coming-soon__whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #25D366;
+  color: #ffffff;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.shop-coming-soon__whatsapp-btn:hover {
+  background: #1da851;
+}
+
+.shop-coming-soon__alt-info {
+  color: #777;
+  font-size: 15px;
+}
+
+.shop-coming-soon__alt-info p {
+  margin-bottom: 6px;
+}
+
+.shop-coming-soon__alt-info strong {
+  color: #2a1a0a;
+}
+
+@media (max-width: 600px) {
+  .shop-coming-soon__title { font-size: 26px; }
+  .shop-coming-soon__cta-section { padding: 24px 16px; }
+}
+
+/* ============================================
+   PULSE INDICATOR SU BOTTONE SHOP (social bar)
+   ============================================ */
+.socials__shop-pulse {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: #d4a942;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 0 rgba(212, 169, 66, 0.7);
+  animation: shop-pulse 2s infinite;
+}
+
+@keyframes shop-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(212, 169, 66, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(212, 169, 66, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(212, 169, 66, 0);
+  }
+}
+
+/* cart disabled notice */
+.cart-page__disabled-notice {
+  padding: 16px 20px;
+  background: #fdf6e8;
+  border: 1px solid #d4a942;
+  border-radius: 6px;
+  color: #7a5c1e;
+  font-size: 15px;
+  text-align: center;
 }
