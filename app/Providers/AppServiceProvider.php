@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -27,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('shopEnabled', function () {
             return \App\Helpers\SettingHelper::shopEnabled();
         });
+
+	if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
+
