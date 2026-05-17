@@ -46,21 +46,21 @@ Route::middleware('shop.enabled')->group(function () {
 });
 
 // Pagine legali
-Route::get('/privacy-policy', function () {
+Route::get('/termini-di-vendita', function () {
+    return view('pages.terms');
+})->name('terms');
+
+Route::get('/informativa-privacy', function () {
     return view('pages.privacy-policy');
 })->name('privacy-policy');
 
-Route::get('/return-policy', function () {
+Route::get('/politica-reso', function () {
     return view('pages.return-policy');
 })->name('return-policy');
 
-Route::get('/shipping-policy', function () {
+Route::get('/spedizioni-consegne', function () {
     return view('pages.shipping-policy');
 })->name('shipping-policy');
-
-Route::get('/terms', function () {
-    return view('pages.terms');
-})->name('terms');
 
 Route::get('/cookie-policy', function () {
     return view('pages.cookie-policy');
